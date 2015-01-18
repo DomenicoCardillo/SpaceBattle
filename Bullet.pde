@@ -46,25 +46,11 @@ class Bullet {
     }
     return false;
   }
-
-// NO! but don't delete.
-// This control is not necessary.
-//          if(eny.get(ceil(w)) != null){
-//            // Controll for range of x of element in ceiling w
-//            if(x >= eny.get(ceil(w)).x && x <= eny.get(ceil(w)).x + enemyWidth){
-//              eny.get(ceil(w)).delete(ceil(w));
-//              println("ceiiiiil");
-//              return true;
-//            }
-//          }
-
-
   void show(){
     pushMatrix();
     fill(0, 255, 0);
     noStroke();
     image(sprite, x, y, bulletWidth, bulletHeight);
-    //rect(x, y, bulletWidth, bulletHeight);
     popMatrix();  
   }
 

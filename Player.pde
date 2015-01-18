@@ -31,7 +31,7 @@ class Player {
       x -= speed;
     }
     // Fire keys was pressed.
-    if(fire && fireOn){
+    if((up || backspace) && fireOn){
       fireInProcess = true;
       fireOn = false;
       bul.add( new Bullet(x + playerWidth/2, y - playerHeight/2 - bulletHeight, bulletSpeed, "img/laserGreen.png") );
@@ -69,7 +69,6 @@ class Player {
     fill(0, 0, 255);
     noStroke();
     image(sprite, x, y, playerWidth, playerHeight);
-    //rect(x, y, playerWidth, playerHeight);
     popMatrix();  
   }
   

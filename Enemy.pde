@@ -18,13 +18,10 @@ class Enemy {
     sprite = loadImage(path);
     speedX = 0.20; 
     acc = 0.025; 
-    maxSpeedX = 2.00;
+    maxSpeedX = 1.40;
     bul = new ArrayList < EBullet > (maxBulletOnScreen);
   }
   void update(int index){
-    
-    // Create Enemy object of support, maybe not necessary
-    // Enemy tempEnemy = eny.get(index);
     
     // Moviment left and right.
     if(x + enemyWidth < (index+1) * pointOfInterest && direction == "left") x += speedX;
@@ -33,16 +30,12 @@ class Enemy {
     else direction = "left";
     
     timeElapsed++;
-    // Time elapsed, after 80 frame speed is incrased by acceleration.
-    if(timeElapsed > 80){
+    // Time elapsed, after (GLOBAL.ENEMY_MOVE_FRAME) frame speed is incrased by acceleration.
+    if(timeElapsed > ENEMY_MOVE_FRAME){
       timeElapsed = 0;
       // incrased speed += acceleration
       for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = speedX + acc;
     } 
-    
-    /* 
-    ** To do: Fix the problem, the eny[0] enemy has a problem, with timeElapsed and at the beginning is unable to touch the edge of the pointOfInterest.  
-    */
     
     // Too Fast, fix to a maxSpeedX value.
     if(speedX > maxSpeedX) for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = maxSpeedX;
@@ -79,17 +72,33 @@ class Enemy {
         enemyFireInProcess = false;
       }
     }  
-    // Shoot a bullet each 50 frames.
-    if(enemyTimeOfFire == 50){
+    // Shoot a bullet each (GLOBAL.SHOT_BULLET_FRAME) frames.
+    if(enemyTimeOfFire == SHOT_BULLET_FRAME){ 
       enemyTimeOfFire = 0;
       enemyFireOn = true;
     }
     // EBullet time of frame counter is incrased.
     enemyTimeOfFire++;
   }
-  void respawn(int index){
-    eny.set(index, new Enemy(pointOfInterest*index, height/20, "img/enemy.png"));
-    numberOfEnemyOnScreen++;
+  
+  /**
+   * Respawn n-enemy
+   *
+   * @param num, number of enemy to respwan.
+   * @return
+   */
+  
+  void respawn(int num){
+      int numOfRespawns = 0;  
+      // Respawn n - enemy
+      for(int i = 0; i < numberOfEnemy; i++){
+        if(numOfRespawns == num) break;
+        if(eny.get(i) == null){
+           eny.set(i, new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
+           numberOfEnemyOnScreen++;
+           numOfRespawns++;
+        }
+      }
   }
   void delete(int index){
     eny.set(index, null);
@@ -100,7 +109,6 @@ class Enemy {
     fill(255, 0, 0);
     noStroke();
     image(sprite, x, y, enemyWidth, enemyHeight);
-    //rect(x, y, enemyWidth, enemyHeight);
     popMatrix();  
   }
 }

@@ -49,7 +49,6 @@ class EBullet {
     fill(0, 255, 255);
     noStroke();
     image(sprite, x, y, bulletWidth, bulletHeight);
-    //rect(x, y, bulletWidth, bulletHeight);
     popMatrix();  
   }
 
