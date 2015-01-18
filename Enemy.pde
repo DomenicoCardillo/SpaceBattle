@@ -101,6 +101,10 @@ class Enemy {
         }
       }
   }
+  
+  /*
+  *   TO DO: forse al posto di settare è meglio svuotare l'array e rifarlo creando numberofenemy oggetti di nuoovo.
+  */
   void delete(int index){
     eny.set(index, null);
     numberOfEnemyOnScreen--;

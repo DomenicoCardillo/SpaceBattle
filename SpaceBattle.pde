@@ -42,6 +42,9 @@ void draw(){
       musicStop();
     }
     
+    // Load Best Score.
+    if(bestScore == 0) bestScore = loadBest();
+    
     // Enemy UPDATE and SHOW.
     for(int i = 0; i < numberOfEnemy; i++){
       if(eny.get(i) != null){
@@ -58,7 +61,7 @@ void draw(){
     showStats(score);
     
     // Game Over for player
-    if(p.getLife() == 0) gameOver(false);
+    if(p.getLife() == 0) gameOver(false, score);
     
     if(singleplayer){     
       // Game Over for enemy, and level up!
@@ -88,11 +91,12 @@ void draw(){
       }
       // You Win.
       if(LEVEL == 3){
-        gameOver(true);
+        gameOver(true, 0);
       } 
     }
     else if(arcade){
         score++;
+        println(SHOT_BULLET_FRAME);
         if(!set && numberOfEnemyOnScreen == 1){
           set = true;
           if(SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;

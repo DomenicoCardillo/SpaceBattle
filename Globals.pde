@@ -19,7 +19,7 @@ Boolean arcade = false;
 Boolean set = false;
 
 int score = 0;
-int bestScore = 200;
+int bestScore = 0;
 
 /* Img */
 PImage bg;
@@ -29,7 +29,7 @@ ArrayList < Enemy > eny;
 Player p;
 
 /* Main */ 
-int numberOfEnemy = 6;
+int numberOfEnemy = 1;
 int numberOfEnemyOnScreen = numberOfEnemy;
 Boolean gameStart = false;
 int pointOfInterest = WIDTH/numberOfEnemy;

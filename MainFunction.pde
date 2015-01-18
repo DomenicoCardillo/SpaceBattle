@@ -3,7 +3,7 @@
  * File: MainFunction
  *
  * Contain all the function,
- * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), showStats(int), showWarning().
+ * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), loadBest(), musicStop(), showStats(int), showWarning().
  *
  */
  
@@ -101,18 +101,38 @@ void startMenu() {
   loop();
 }
 
-void gameOver(Boolean result) {
+void gameOver(Boolean result, int score) {
   String x = "    You have";
   String x1 = "< Press '1' to retry >"; 
   pushMatrix();
   fill(255);
   textSize(20);
   background(0);
-  if (result) text(x + " won!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2), height*0.4);
-  else text(x + " lost!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.4);
-  text(x1, width*0.5 - (textWidth(x1)/2), height*0.6);
+  if (result) text(x + " won!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2), height*0.3);
+  else text(x + " lost!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
+  text(x1, width*0.5 - (textWidth(x1)/2), height*0.5);
   popMatrix();
-
+  
+  if(arcade){
+    if(bestScore < score){
+      String best1 = "< Your New best: " + score + " >"; 
+      text(best1, width*0.5 - (textWidth(best1)/2), height*0.7);
+      
+      // Add to file
+      
+      PrintWriter output;
+      output = createWriter("score.txt");
+      output.println(score);
+      output.flush(); // Writes the remaining data to the file
+      output.close(); // Finishes the file
+      
+      bestScore = loadBest();
+    }
+    else{
+      String best2 = "< You Best: " + bestScore  + " >"; 
+      text(best2, width*0.5 - (textWidth(best2)/2), height*0.7);
+    }  
+  }
   // The game is finished.
   noLoop();
   resetGame();
@@ -148,6 +168,25 @@ void showStats(int score) {
 void musicStop(){
   player.close();
   minim.stop();
+}
+
+int loadBest(){
+  BufferedReader reader;
+  String line;
+  
+  reader = createReader("score.txt");
+  try{
+    line = reader.readLine();
+  }catch(IOException e){
+    e.printStackTrace();
+    line = null;
+  }
+  if(line != null){
+    String[] pieces = split(line, TAB);
+    int sc = int(pieces[0]);
+    return sc; 
+  }
+  return 0;
 }
 
 void showWarningFireOff() {
