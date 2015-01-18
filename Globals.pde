@@ -1,8 +1,8 @@
-/*
-*
-**
-***  Globals
-*/
+/**
+ * File: Globals
+ *
+ * Contain all the global variables of this sketch.
+ */
 
 final int WIDTH = 500; // Change with multiply of 100, and delete background image.
 final int HEIGHT = 300; // Change with multiply of 100, and delete background image.

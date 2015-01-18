@@ -1,8 +1,10 @@
-/*
-*
-**
-***  Class Player
-*/
+
+/**
+ * Class Player
+ *
+ * @attr: x, y, speedX, acc, maxSpeedX, life, <Bullet> bul, sprite.
+ * @function: Player(float, float, String), update(), playerDamage(), setSprite(String), getLife(), show();
+ */
 
 class Player {
   float x, y;

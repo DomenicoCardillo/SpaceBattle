@@ -1,8 +1,10 @@
-/*
-*
-**
-***  Class Bullet
-*/
+
+/**
+ * Class Bullet
+ *
+ * @attr: x, y, speed, sprite.
+ * @function: Bullet(float, float, float, String), update(), isFinished(), collideWithEnemy(), show();
+ */
 
 class Bullet {
   float x, y;

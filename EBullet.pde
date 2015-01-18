@@ -1,8 +1,10 @@
-/*
-*
-**
-***  Class Enemy Bullet
-*/
+
+/**
+ * Class EBullet
+ *
+ * @attr: x, y, speed, sprite.
+ * @function: EBullet(float, float, float, String), update(), isFinished(), collideWithPlayer(), show();
+ */
 
 class EBullet {
   float x, y;

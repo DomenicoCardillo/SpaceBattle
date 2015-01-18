@@ -1,8 +1,12 @@
-/*
-*
-**
-***  Key Controller
-*/
+/**
+ * File: Key Controller
+ *
+ * Overriding of keypressed and keyrelased function.
+ * @Keys: right, left, up, backspace, num1, num2.
+ * 
+ */
+ 
+ 
 void keyPressed(){
   switch(keyCode) {
     case RIGHT: right = true; break;

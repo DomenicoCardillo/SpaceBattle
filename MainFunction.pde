@@ -1,8 +1,12 @@
-/*
-*
- **
- ***  Main Function
+
+/**
+ * File: MainFunction
+ *
+ * Contain all the function,
+ * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), showStats(int), showWarning().
+ *
  */
+ 
  
 int columnOfInterest(float x) {
   for (int i = 0; i < numberOfEnemy; i++) {
@@ -70,7 +74,8 @@ void startMenu() {
       gameStart = true;
       initGame();
     }
-  } else {
+  } 
+  else {
     String x1 = "< Press '1' for Level Game >";
     String x2 = "< Press '2' for Arcade Game >";
     pushMatrix();

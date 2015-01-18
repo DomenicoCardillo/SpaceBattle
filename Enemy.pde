@@ -1,8 +1,10 @@
-/*
-*
-**
-***  Class Enemy
-*/
+
+/**
+ * Class EBullet
+ *
+ * @attr: x, y, speedX, acc, maxSpeedX, <EBullet> bul, sprite.
+ * @function: Enemy(float, float, String), update(int), respawn(int), delete(int), show();
+ */
 
 class Enemy {
   float x, y;

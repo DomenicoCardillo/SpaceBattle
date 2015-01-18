@@ -1,16 +1,15 @@
-/*
-*
-**
-***  Prj name: SpaceBattle
-*/
+import ddf.minim.*;
 
-    
-    // Number Of Level = 3 -> [0, 1, 2];
-    // Level 0: difficult normal: low rateo, low speed;
-    // Level 1: no bullet for player, he have to resist;
-    // Level 2: difficult hard: hight rateo of bullet. 
-
-
+/**
+ * Project Name: Space Battle!
+ * File Name: SpaceBattle
+ *
+ *
+ * Created by Processing 2.2.1
+ * Studente: Domenico Cardillo
+ * Matricola: W83000090
+ */
+ 
 void setup(){
   
   // GLOBAL.WIDTH, GLOBAL.HEIGHT
@@ -82,7 +81,7 @@ void draw(){
       } 
     }
     else if(arcade){
-                score++;
+        score++;
         if(!set && numberOfEnemyOnScreen == 1){
           set = true;
           if(SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;
