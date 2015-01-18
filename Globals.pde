@@ -3,6 +3,9 @@
  *
  * Contain all the global variables of this sketch.
  */
+Minim minim; // Audio Context
+AudioPlayer player;
+
 
 final int WIDTH = 500; // Change with multiply of 100, and delete background image.
 final int HEIGHT = 300; // Change with multiply of 100, and delete background image.

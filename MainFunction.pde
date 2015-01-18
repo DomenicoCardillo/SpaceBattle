@@ -145,6 +145,10 @@ void showStats(int score) {
 
 }
 
+void musicStop(){
+  player.close();
+  minim.stop();
+}
 
 void showWarningFireOff() {
   String x1 = " <Warning> ";

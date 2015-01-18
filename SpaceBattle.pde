@@ -18,6 +18,10 @@ void setup(){
   // Adding bg image.
   bg = loadImage("img/bg.jpg");
   
+  // Adding music
+  minim = new Minim(this);
+  player = minim.loadFile("audio/bg.mp3", 2048);
+  
   // Set FrameRate
   frameRate(60);
   
@@ -30,6 +34,13 @@ void draw(){
     
     // Add Background
     background(bg);
+    
+    // Play Music
+    player.play();
+    if(backspace){
+      // Stop Music
+      musicStop();
+    }
     
     // Enemy UPDATE and SHOW.
     for(int i = 0; i < numberOfEnemy; i++){
