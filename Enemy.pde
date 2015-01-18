@@ -60,7 +60,6 @@ class Enemy {
       for(int i = 0; i < bul.size(); i++){ 
         // Update and show bullet with a cicle for.
         if(!bul.get(i).isFinished() && !bul.get(i).collideWithPlayer()){
-          println(bul.size());
           bul.get(i).update();
           bul.get(i).show();
         }
@@ -103,6 +102,10 @@ class Enemy {
   void delete(int index){
     eny.set(index, null);
     numberOfEnemyOnScreen--;
+    if(arcade && numberOfEnemyOnScreen == 0){
+      set = false;
+      respawn(numberOfEnemy);
+    } 
   }
   void show(){
     pushMatrix();

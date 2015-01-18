@@ -62,6 +62,10 @@ class Player {
   }
   void playerDamage(){
     life--;
+    setSprite("img/playerDamaged.png");
+  }
+  void setSprite(String path){
+    sprite = loadImage(path);    
   }
   int getLife(){ return life; }
   void show(){

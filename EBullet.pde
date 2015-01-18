@@ -34,7 +34,7 @@ class EBullet {
           p.playerDamage();
           return true;
         }
-        // Istruction for collide tipe 2, when the bullet hit with his left border, the (playerX + bulletWidth) right border of the player
+        // Istruction for collide type 2, when the bullet hit with his left border, the (playerX + bulletWidth) right border of the player.
         if(x + bulletWidth > p.x && x + bulletWidth < p.x + bulletWidth){
           p.playerDamage();
           return true;
