@@ -29,9 +29,10 @@ ArrayList < Enemy > eny;
 Player p;
 
 /* Main */ 
-int numberOfEnemy = 1;
+int numberOfEnemy = 7;
 int numberOfEnemyOnScreen = numberOfEnemy;
 Boolean gameStart = false;
+Boolean gameIsOver = false;
 int pointOfInterest = WIDTH/numberOfEnemy;
 int paddingDown = 8;
 
@@ -65,5 +66,5 @@ Boolean enemyFireOn = true;
 
 /* Key */
 Boolean right = false, left = false, up = false, backspace = false;
-Boolean num1 = false, num2 = false;
+Boolean num1 = false, num2 = false, num3 = false;
 

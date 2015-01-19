@@ -15,6 +15,8 @@ void keyPressed(){
     case ' ': backspace = fire; break;
     case '1': num1 = true; break;
     case '2': num2 = true; break;
+     case '3': num3 = true; break;
+
 
   }
 }
@@ -26,6 +28,7 @@ void keyReleased(){
     case ' ': backspace = false; break;
     case '1': num1 = false; break;
     case '2': num2 = false; break;
+    case '3': num3 = false; break;
   }
 }
 

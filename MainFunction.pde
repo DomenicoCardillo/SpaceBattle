@@ -103,7 +103,7 @@ void startMenu() {
 
 void gameOver(Boolean result, int score) {
   String x = "    You have";
-  String x1 = "< Press '1' to retry >"; 
+  String x1 = "< Press '3' to retry >"; 
   pushMatrix();
   fill(255);
   textSize(20);
@@ -134,7 +134,7 @@ void gameOver(Boolean result, int score) {
     }  
   }
   // The game is finished.
-  noLoop();
+  gameIsOver = true;
   resetGame();
   LEVEL = 0;
 }

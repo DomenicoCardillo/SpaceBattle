@@ -29,7 +29,13 @@ void setup(){
   noLoop();
 }
 void draw(){
-  if(!gameStart) startMenu();
+  if(gameIsOver){ 
+    if(num3){
+      gameIsOver = false;
+      gameStart = false;
+    }
+  }
+  else if(!gameStart) startMenu();
   else{
     
     // Add Background
