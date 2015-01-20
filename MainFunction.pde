@@ -6,8 +6,8 @@
  * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), loadBest(), musicStop(), showStats(int), showWarning().
  *
  */
- 
- 
+
+
 int columnOfInterest(float x) {
   for (int i = 0; i < numberOfEnemy; i++) {
     if (x >= pointOfInterest*i && x <= pointOfInterest * (i+1)) return (i+1);
@@ -56,6 +56,7 @@ void resetGame() {
   right = left = up = backspace = num1 = num2 = false;
   fire = true; // possibility for player to fire a bullet.
   fireOff = 0;
+  SHOT_BULLET_FRAME = 300;
 }
 
 void startMenu() {
@@ -74,8 +75,7 @@ void startMenu() {
       gameStart = true;
       initGame();
     }
-  } 
-  else {
+  } else {
     String x1 = "< Press '1' for Level Game >";
     String x2 = "< Press '2' for Arcade Game >";
     pushMatrix();
@@ -112,26 +112,25 @@ void gameOver(Boolean result, int score) {
   else text(x + " lost!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.5);
   popMatrix();
-  
-  if(arcade){
-    if(bestScore < score){
+
+  if (arcade) {
+    if (bestScore < score) {
       String best1 = "< Your New best: " + score + " >"; 
       text(best1, width*0.5 - (textWidth(best1)/2), height*0.7);
-      
+
       // Add to file
-      
+
       PrintWriter output;
       output = createWriter("score.txt");
       output.println(score);
       output.flush(); // Writes the remaining data to the file
       output.close(); // Finishes the file
-      
-      bestScore = loadBest();
-    }
-    else{
+
+        bestScore = loadBest();
+    } else {
       String best2 = "< You Best: " + bestScore  + " >"; 
       text(best2, width*0.5 - (textWidth(best2)/2), height*0.7);
-    }  
+    }
   }
   // The game is finished.
   gameIsOver = true;
@@ -157,34 +156,34 @@ void showStats(int score) {
   rotate(radians(270));
   text(ne + numberOfEnemyOnScreen + " >", 0, 0);
   popMatrix();
-  
+
   pushMatrix();
   textSize(12);
   text(sc + score + " >", width - 100, height - 8);
   popMatrix();
-
 }
 
-void musicStop(){
+void musicStop() {
   player.close();
   minim.stop();
 }
 
-int loadBest(){
+int loadBest() {
   BufferedReader reader;
   String line;
   
   reader = createReader("score.txt");
+
   try{
     line = reader.readLine();
   }catch(IOException e){
     e.printStackTrace();
     line = null;
   }
-  if(line != null){
+  if (line != null) {
     String[] pieces = split(line, TAB);
     int sc = int(pieces[0]);
-    return sc; 
+    return sc;
   }
   return 0;
 }

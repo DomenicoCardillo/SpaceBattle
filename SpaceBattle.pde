@@ -102,7 +102,6 @@ void draw(){
     }
     else if(arcade){
         score++;
-        println(SHOT_BULLET_FRAME);
         if(!set && numberOfEnemyOnScreen == 1){
           set = true;
           if(SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;

@@ -46,7 +46,6 @@ class Enemy {
     if(enemyFireOn){ // Init to shoot when the speed of the enemies reaches the maxSpeed. 
       enemyFireInProcess = true;
       enemyFireOn = false;
-      
       // Search an enemy on screen that can shoot a bullet.
       Boolean find = false;
       int enemyShoot = 0;
@@ -74,7 +73,7 @@ class Enemy {
       }
     }  
     // Shoot a bullet each (GLOBAL.SHOT_BULLET_FRAME) frames.
-    if(enemyTimeOfFire == SHOT_BULLET_FRAME){ 
+    if(enemyTimeOfFire >= SHOT_BULLET_FRAME){ 
       enemyTimeOfFire = 0;
       enemyFireOn = true;
     }
@@ -100,6 +99,7 @@ class Enemy {
            numOfRespawns++;
         }
       }
+      enemyFireOn = true;
   }
   
   /*
