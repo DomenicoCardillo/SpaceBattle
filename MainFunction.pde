@@ -57,6 +57,7 @@ void resetGame() {
   fire = true; // possibility for player to fire a bullet.
   fireOff = 0;
   SHOT_BULLET_FRAME = 300;
+  score = 0;
 }
 
 void startMenu() {
@@ -114,7 +115,7 @@ void gameOver(Boolean result, int score) {
   popMatrix();
 
   if (arcade) {
-    if (bestScore < score) {
+    if (score > bestScore){
       String best1 = "< Your New best: " + score + " >"; 
       text(best1, width*0.5 - (textWidth(best1)/2), height*0.7);
 
@@ -126,8 +127,9 @@ void gameOver(Boolean result, int score) {
       output.flush(); // Writes the remaining data to the file
       output.close(); // Finishes the file
 
-        bestScore = loadBest();
-    } else {
+      bestScore = loadBest();
+    } 
+    else{
       String best2 = "< You Best: " + bestScore  + " >"; 
       text(best2, width*0.5 - (textWidth(best2)/2), height*0.7);
     }
