@@ -53,7 +53,7 @@ class Enemy {
         enemyShoot = int(random(0, numberOfEnemy));
         if(eny.get(enemyShoot) != null) find = true;
       }
-      bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, bulletSpeed*1.5, "img/laserRed.png") );
+      bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRed.png") );
     }
     
     // The fire is in process, the bullets must be showed on the screen. 

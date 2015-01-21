@@ -105,6 +105,9 @@ void draw(){
         if(!set && numberOfEnemyOnScreen == 1){
           set = true;
           if(SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;
+          else{
+            if(enemyBulletSpeed < 5) enemyBulletSpeed += 0.2;
+          }
         }
     }
   } //else !gamestart

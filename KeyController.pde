@@ -1,9 +1,9 @@
+
 /**
  * File: Key Controller
  *
  * Overriding of keypressed and keyrelased function.
  * @Keys: right, left, up, backspace, num1, num2.
- * 
  */
  
  
@@ -15,7 +15,7 @@ void keyPressed(){
     case ' ': backspace = fire; break;
     case '1': num1 = true; break;
     case '2': num2 = true; break;
-     case '3': num3 = true; break;
+    case '3': num3 = true; break;
 
 
   }

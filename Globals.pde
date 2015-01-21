@@ -1,8 +1,10 @@
+
 /**
  * File: Globals
  *
  * Contain all the global variables of this sketch.
  */
+ 
 Minim minim; // Audio Context
 AudioPlayer player;
 
@@ -52,7 +54,7 @@ int fireOff = 0;
 int bulletWidth = 5;
 int bulletHeight = 10;
 Boolean fireInProcess = false;
-int bulletSpeed = 3;
+float bulletSpeed = 5.5;
 int bulletCount = -1;
 int timeOfFire = 0;
 Boolean fireOn = false;
@@ -61,6 +63,7 @@ int maxBulletOnScreen = 8;
 
 /* EBullet */
 int enemyTimeOfFire = 0;
+float enemyBulletSpeed = 3;
 Boolean enemyFireInProcess = false;
 Boolean enemyFireOn = true;
 

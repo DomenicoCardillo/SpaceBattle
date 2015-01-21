@@ -4,7 +4,6 @@
  *
  * Contain all the function,
  * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), loadBest(), musicStop(), showStats(int), showWarning().
- *
  */
 
 
@@ -58,6 +57,7 @@ void resetGame() {
   fireOff = 0;
   SHOT_BULLET_FRAME = 300;
   score = 0;
+  enemyBulletSpeed = 3;
 }
 
 void startMenu() {
@@ -72,11 +72,12 @@ void startMenu() {
     text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
     popMatrix();
 
-    if (num1) {
+    if(num1){
       gameStart = true;
       initGame();
     }
-  } else {
+  } 
+  else{
     String x1 = "< Press '1' for Level Game >";
     String x2 = "< Press '2' for Arcade Game >";
     pushMatrix();
@@ -175,14 +176,13 @@ int loadBest() {
   String line;
   
   reader = createReader("score.txt");
-
   try{
     line = reader.readLine();
   }catch(IOException e){
     e.printStackTrace();
     line = null;
   }
-  if (line != null) {
+  if(line != null) {
     String[] pieces = split(line, TAB);
     int sc = int(pieces[0]);
     return sc;

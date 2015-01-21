@@ -18,7 +18,7 @@ class Player {
     this.x = x;
     this.y = y;
     sprite = loadImage(path);
-    speed = 3.5;
+    speed = 4.3;
     life = 3;
     bul = new ArrayList < Bullet > (maxBulletOnScreen);
   }
