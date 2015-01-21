@@ -102,7 +102,7 @@ void startMenu() {
 }
 
 void gameOver(Boolean result, int score) {
-  String x = "    You have";
+  String x = "          You have";
   String x1 = "< Press '3' to retry >"; 
   pushMatrix();
   fill(255);
