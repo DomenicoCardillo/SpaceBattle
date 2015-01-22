@@ -17,10 +17,18 @@ void setup(){
   
   // Adding bg image.
   bg = loadImage("img/bg.jpg");
+  bg1 = loadImage("img/bg.jpg");
+  bg2 = loadImage("img/bg.jpg");
   
+  // Create level background
+  createBackground();
+   
   // Adding music
   minim = new Minim(this);
   player = minim.loadFile("audio/bg.mp3", 2048);
+  
+  // Play Music
+  player.play();
   
   // Set FrameRate
   frameRate(60);
@@ -39,10 +47,10 @@ void draw(){
   else{
     
     // Add Background
-    background(bg);
+    if(LEVEL == 0) background(bg);
+    if(LEVEL == 1) background(bg1);
+    if(LEVEL == 2) background(bg2);
     
-    // Play Music
-    player.play();
     if(backspace){
       // Stop Music
       musicStop();

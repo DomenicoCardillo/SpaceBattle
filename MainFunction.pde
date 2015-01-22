@@ -15,6 +15,29 @@ int columnOfInterest(float x) {
 }
 
 
+void createBackground(){
+  int loc;
+  float r, g, b;
+  bg.loadPixels();
+  bg1.loadPixels();
+  bg2.loadPixels();
+ 
+  for(int i = 0; i < bg.width; i++){
+    for(int j = 0; j < bg.height; j++){
+      loc = i + (j * bg.width);
+      r = red(bg.pixels[loc]);
+      b = blue(bg.pixels[loc]);
+      g = green(bg.pixels[loc]);
+      bg1.pixels[loc] = color(0, b, 0);
+      bg2.pixels[loc] = color(r, b, 0);
+    }
+  }
+  bg.updatePixels(); 
+  bg2.updatePixels(); 
+  bg1.updatePixels();
+}
+
+
 void initGame() {
   /* Initalize the game. */
 

@@ -102,12 +102,11 @@ class Enemy {
       enemyFireOn = true;
   }
   
-  /*
-  *   TO DO: forse al posto di settare è meglio svuotare l'array e rifarlo creando numberofenemy oggetti di nuoovo.
-  */
   void delete(int index){
-    eny.set(index, null);
+    eny.set(index, null); // ?
     numberOfEnemyOnScreen--;
+    
+    // Respawn if arcade and ENEMY ALL DIE.
     if(arcade && numberOfEnemyOnScreen == 0){
       set = false;
       respawn(numberOfEnemy);

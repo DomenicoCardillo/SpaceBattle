@@ -24,7 +24,7 @@ int score = 0;
 int bestScore = 0;
 
 /* Img */
-PImage bg;
+PImage bg, bg1, bg2;
 
 /* Objects */
 ArrayList < Enemy > eny;
@@ -39,14 +39,14 @@ int pointOfInterest = WIDTH/numberOfEnemy;
 int paddingDown = 8;
 
 /* Enemy  */ 
-int enemyWidth = 30;
-int enemyHeight = 20;
+int enemyWidth = 35; // 30
+int enemyHeight = 25; // 20
 String direction = "left";
 int timeElapsed = 0;
 
 /* Player */
-int playerWidth = 30;
-int playerHeight = 20;
+int playerWidth = 35; 
+int playerHeight = 25;
 Boolean fire = true;
 int fireOff = 0;
 
