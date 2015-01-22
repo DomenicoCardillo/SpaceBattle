@@ -8,6 +8,9 @@
 Minim minim; // Audio Context
 AudioPlayer player;
 
+// Font
+PFont font;
+
 
 final int WIDTH = 500; // Change with multiply of 100, and delete background image.
 final int HEIGHT = 300; // Change with multiply of 100, and delete background image.
@@ -72,5 +75,5 @@ Boolean enemyFireOn = true;
 
 /* Key */
 Boolean right = false, left = false, up = false, backspace = false;
-Boolean num1 = false, num2 = false, num3 = false;
+Boolean num1 = false, num2 = false, num3 = false, resScore = false;
 

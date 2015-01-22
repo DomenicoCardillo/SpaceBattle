@@ -77,6 +77,7 @@ class Player {
     sprite = loadImage(path);    
   }
   int getLife(){ return life; }
+  void setLife(int life){ this.life = life; }
   void show(){
     pushMatrix();
     fill(0, 0, 255);

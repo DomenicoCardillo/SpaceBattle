@@ -28,6 +28,10 @@ void setup() {
   minim = new Minim(this);
   player = minim.loadFile("audio/bg.mp3", 2048);
 
+  // Adding Font
+  // font = loadFont("HarlowSolid-48.vlw"); 
+  // textFont(font); 
+  
   // Play Music
   player.play();
 
@@ -43,7 +47,8 @@ void draw() {
       gameIsOver = false;
       gameStart = false;
     }
-  } else if (!gameStart) startMenu();
+  } 
+  else if (!gameStart) startMenu();
   else {
     
     // Add Background
@@ -97,9 +102,9 @@ void draw() {
       if (LEVEL == 1) {
         ENEMY_MOVE_FRAME = 90;
         fireOff++;
-        if (fireOff <= 900) {
+        if (fireOff <= 2000) {
           SHOT_BULLET_FRAME = 50;
-          showWarningFireOff();
+          showWarningFireOff(fireOff);
           fire = false;
         } 
         else{
@@ -121,7 +126,10 @@ void draw() {
     else if (arcade) { 
       if (!set && numberOfEnemyOnScreen == 1) {
         set = true;
-        if (SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;
+        if (SHOT_BULLET_FRAME - 50 > 0){
+          SHOT_BULLET_FRAME -= 50;
+          if(p.getLife() < 3) p.setLife(p.getLife() + 1);
+        }
         else {
           if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.35;
         }
@@ -129,5 +137,6 @@ void draw() {
     }
   } //else !gamestart
   if (backspace) musicStop();
+  if (resScore) resetBestScore();
 }
 

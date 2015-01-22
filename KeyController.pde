@@ -16,8 +16,8 @@ void keyPressed(){
     case '1': num1 = true; break;
     case '2': num2 = true; break;
     case '3': num3 = true; break;
-
-
+    case 'r': resScore = true; break;
+    case 'R': resScore = true; break;
   }
 }
 void keyReleased(){
@@ -29,6 +29,8 @@ void keyReleased(){
     case '1': num1 = false; break;
     case '2': num2 = false; break;
     case '3': num3 = false; break;
+    case 'r': resScore = false; break;
+    case 'R': resScore = false; break;
   }
 }
 

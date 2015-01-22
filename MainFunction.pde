@@ -14,15 +14,15 @@ int columnOfInterest(float x) {
   return -1;
 }
 
-void createBackground(){
+void createBackground() {
   int loc;
   float r, g, b;
   bg.loadPixels();
   bg1.loadPixels();
   bg2.loadPixels();
- 
-  for(int i = 0; i < bg.width; i++){
-    for(int j = 0; j < bg.height; j++){
+
+  for (int i = 0; i < bg.width; i++) {
+    for (int j = 0; j < bg.height; j++) {
       loc = i + (j * bg.width);
       r = red(bg.pixels[loc]);
       b = blue(bg.pixels[loc]);
@@ -45,8 +45,8 @@ void initGame() {
 
   // Create the array object with numberofenemy, enemy.
   eny = new ArrayList < Enemy > ();
-  
-  for(int i = 0; i < numberOfEnemy; i++){
+
+  for (int i = 0; i < numberOfEnemy; i++) {
     eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
   }
 }
@@ -55,7 +55,7 @@ void resetGame() {
   // Reset Player
   p = null;
   // Reset Enemy
-  for (int i = 0; i < numberOfEnemy; i++){
+  for (int i = 0; i < numberOfEnemy; i++) {
     eny.set(i, null);
   }
   // Reset Number Of Enemy.
@@ -87,7 +87,7 @@ void resetGame() {
 void startMenu() {
   if (LEVEL > 0 && LEVEL < 3) {
     String x1 = "Level " + (LEVEL) + " success!!";
-    String x2 = "< Press '1' for Level: " + (LEVEL + 1) + " >";
+    String x2 = "< Press key '1' for Level: " + (LEVEL + 1) + " >";
     pushMatrix();
     fill(255);
     textSize(20);
@@ -96,20 +96,37 @@ void startMenu() {
     text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
     popMatrix();
 
-    if(num1){
+    if (num1) {
       gameStart = true;
       initGame();
     }
   } 
-  else{
-    String x1 = "< Press '1' for Level Game >";
-    String x2 = "< Press '2' for Arcade Game >";
+  else {
+    String x1 = "< Press key '1' for Level Game >";
+    String x2 = "< Press key '2' for Arcade Game >";
+
+    String x3 = "Press 'backspace' for stop the music.";
+    String x4 = "Press R to RESET your Arcade Best Score.";
+    String x5 = "Use direction keys for MOVE the player!";
+    String x6 = "Use backspace or up direction key for SHOOT a bullet!";
+    
     pushMatrix();
     fill(255);
     textSize(20);
     background(0);
-    text(x1, width*0.5 - (textWidth(x1)/2), height*0.35);
-    text(x2, width*0.5 - (textWidth(x2)/2), height*0.65);
+    text(x1, width*0.5 - (textWidth(x1)/2), height*0.40);
+    text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
+
+    textSize(13);
+    text(x3, width*0.5 - (textWidth(x3)/2), 15);
+    
+    textSize(10);
+    text(x4, width*0.5 - (textWidth(x4)/2), 30);
+    
+    textSize(10);
+    text(x5, width*0.5 - (textWidth(x5)/2), height - 18);
+    text(x6, width*0.5 - (textWidth(x6)/2), height - 5);
+
     popMatrix();
     if (num1) {
       gameStart = true;
@@ -129,7 +146,7 @@ void startMenu() {
 
 void gameOver(Boolean result, int score) {
   String x = "          You have";
-  String x1 = "< Press '3' to retry >"; 
+  String x1 = "< Press key '3' to retry >"; 
   pushMatrix();
   fill(255);
   textSize(20);
@@ -140,8 +157,8 @@ void gameOver(Boolean result, int score) {
   popMatrix();
 
   if (arcade) {
-    if (score > bestScore){
-      String best1 = "< Your New best: " + score + " >"; 
+    if (score > bestScore) {
+      String best1 = "< Your NEW best: " + score + "! >"; 
       text(best1, width*0.5 - (textWidth(best1)/2), height*0.7);
 
       // Add to file
@@ -154,7 +171,7 @@ void gameOver(Boolean result, int score) {
 
       bestScore = loadBest();
     } 
-    else{
+    else {
       String best2 = "< You Best: " + bestScore  + " >"; 
       text(best2, width*0.5 - (textWidth(best2)/2), height*0.7);
     }
@@ -170,11 +187,11 @@ void showStats(int score) {
   pushMatrix();
   fill(255, 255, 0, 70);
   textSize(12);
-  if(arcade) text(sc + score + " >", width - 100, height - 8);
+  if (arcade) text(sc + score + " >", width - 100, height - 8);
   popMatrix();
-  
+
   // Show life
-  for(int i = 0; i < p.getLife(); i++){
+  for (int i = 0; i < p.getLife (); i++) {
     image(life, 5 + i*life.width*0.5, height - (life.height*0.7), 15, 15);
   }
 }
@@ -187,15 +204,16 @@ void musicStop() {
 int loadBest() {
   BufferedReader reader;
   String line;
-  
+
   reader = createReader("score.txt");
-  try{
+  try {
     line = reader.readLine();
-  }catch(IOException e){
+  }
+  catch(IOException e) {
     e.printStackTrace();
     line = null;
   }
-  if(line != null) {
+  if (line != null) {
     String[] pieces = split(line, TAB);
     int sc = int(pieces[0]);
     return sc;
@@ -203,14 +221,24 @@ int loadBest() {
   return 0;
 }
 
-void showWarningFireOff() {
+void showWarningFireOff(float stringFire) {
   String x1 = " <Warning> ";
   String x2 = "You have NO bullet!! ";
   pushMatrix();
-  fill(255, 0, 0);
+  fill(255, 0, 0, 90);
   textSize(14);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.45);
   text(x2, width*0.5 - (textWidth(x2)/2), height*0.55);
+  if(stringFire > 1500) text(stringFire - 2000 + "%", width*0.5, height*0.60);
   popMatrix();
 }
 
+void resetBestScore(){
+    // Add to file 0 reset
+    PrintWriter output;
+    output = createWriter("score.txt");
+    output.println(0);
+    output.flush(); // Writes the remaining data to the file
+    output.close(); // Finishes the file
+    bestScore = loadBest();
+}
