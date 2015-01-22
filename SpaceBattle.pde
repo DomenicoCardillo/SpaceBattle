@@ -45,26 +45,18 @@ void draw(){
   }
   else if(!gameStart) startMenu();
   else{
-    
     // Add Background
     if(LEVEL == 0) background(bg);
     if(LEVEL == 1) background(bg1);
     if(LEVEL == 2) background(bg2);
-    
-    if(backspace){
-      // Stop Music
-      musicStop();
-    }
     
     // Load Best Score.
     if(bestScore == 0) bestScore = loadBest();
     
     // Enemy UPDATE and SHOW.
     for(int i = 0; i < numberOfEnemy; i++){
-      if(eny.get(i) != null){
         eny.get(i).update(i);
-        eny.get(i).show();
-      }
+        if(eny.get(i).alive) eny.get(i).show();
     }
     
     // Player UPDATE and SHOW.
@@ -119,4 +111,6 @@ void draw(){
         }
     }
   } //else !gamestart
+  if(backspace) musicStop();
 }
+  

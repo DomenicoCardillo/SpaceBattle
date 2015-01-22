@@ -46,7 +46,8 @@ void initGame() {
 
   // Create the array object with numberofenemy, enemy.
   eny = new ArrayList < Enemy > ();
-  for (int i = 0; i < numberOfEnemy; i++) {
+  
+  for(int i = 0; i < numberOfEnemy; i++){
     eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
   }
 }
@@ -55,7 +56,7 @@ void resetGame() {
   // Reset Player
   p = null;
   // Reset Enemy
-  for (int i = 0; i < numberOfEnemy; i++) {
+  for (int i = 0; i < numberOfEnemy; i++){
     eny.set(i, null);
   }
   // Reset Number Of Enemy.

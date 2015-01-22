@@ -13,6 +13,7 @@ class Enemy {
   float maxSpeedX;
   ArrayList < EBullet > bul;
   PImage sprite;
+  Boolean alive;
   
   Enemy(float x, float y, String path){
     this.x = x;
@@ -22,6 +23,7 @@ class Enemy {
     acc = 0.025; 
     maxSpeedX = 1.40;
     bul = new ArrayList < EBullet > (maxBulletOnScreen);
+    alive = true;
   }
   void update(int index){
     
@@ -51,7 +53,7 @@ class Enemy {
       int enemyShoot = 0;
       while(!find){
         enemyShoot = int(random(0, numberOfEnemy));
-        if(eny.get(enemyShoot) != null) find = true;
+        if(eny.get(enemyShoot).alive) find = true;
       }
       bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRed.png") );
     }
@@ -93,18 +95,17 @@ class Enemy {
       // Respawn n - enemy
       for(int i = 0; i < numberOfEnemy; i++){
         if(numOfRespawns == num) break;
-        if(eny.get(i) == null){
-           eny.set(i, new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
-           numberOfEnemyOnScreen++;
-           numOfRespawns++;
-        }
+         eny.get(i).alive = true;
+         numberOfEnemyOnScreen++;
+         numOfRespawns++;
       }
       enemyFireOn = true;
   }
   
   void delete(int index){
-    eny.set(index, null); // ?
-    numberOfEnemyOnScreen--;
+    
+    if(eny.get(index).alive) numberOfEnemyOnScreen--;
+    eny.get(index).alive = false;
     
     // Respawn if arcade and ENEMY ALL DIE.
     if(arcade && numberOfEnemyOnScreen == 0){
