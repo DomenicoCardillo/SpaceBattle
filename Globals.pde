@@ -19,12 +19,15 @@ int ENEMY_MOVE_FRAME = 80; // Change for incrase time of enemy to reach the maxi
 Boolean singleplayer = false;
 Boolean arcade = false;
 Boolean set = false;
+Boolean bgIsSet = false;
+int backgroundID = 0;
 
 int score = 0;
 int bestScore = 0;
 
 /* Img */
 PImage bg, bg1, bg2;
+PImage life;
 
 /* Objects */
 ArrayList < Enemy > eny;

@@ -24,12 +24,19 @@ class Player {
   }
   void update(){
     
+    // il player è fermo.
+    if(!right && !left){
+      if(getLife() == 3) setSprite("img/player.png");
+    }  
+    
     // Right keys was pressed, and the player is above the screen.
     if(right && x + playerWidth < width){
+      if(getLife() == 3) setSprite("img/playerRight.png");
       x += speed;
     }
     // Left keys was pressed, and the player is above the screen.
     if(left && x > 0){
+      if(getLife() == 3) setSprite("img/playerLeft.png");
       x -= speed;
     }
     // Fire keys was pressed.
@@ -69,7 +76,6 @@ class Player {
   void setSprite(String path){
     sprite = loadImage(path);    
   }
-  
   int getLife(){ return life; }
   void show(){
     pushMatrix();

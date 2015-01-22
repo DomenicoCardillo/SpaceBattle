@@ -81,6 +81,7 @@ void resetGame() {
   SHOT_BULLET_FRAME = 300;
   score = 0;
   enemyBulletSpeed = 3;
+  bgIsSet = false;
 }
 
 void startMenu() {
@@ -165,30 +166,17 @@ void gameOver(Boolean result, int score) {
 }
 
 void showStats(int score) {
-  String pl = "< Player Life: ";
-  String ne = "< Number Of Enemy: ";
   String sc = "< Score: ";
   pushMatrix();
-  // alpha factor 50 %
-  fill(255, 255, 0, 50);
-  textSize(15);
-  translate(width - textWidth(pl)/4, height*0.5 - textWidth(pl)/2);
-  rotate(radians(90));
-  text(pl + p.getLife() + " >", 0, 0);
-  popMatrix();
-
-  pushMatrix();
-  translate(width/25, height*0.5 + textWidth(ne)/2);
-  rotate(radians(270));
-  text(ne + numberOfEnemyOnScreen + " >", 0, 0);
-  popMatrix();
-
-  pushMatrix();
+  fill(255, 255, 0, 70);
   textSize(12);
   if(arcade) text(sc + score + " >", width - 100, height - 8);
   popMatrix();
   
-  
+  // Show life
+  for(int i = 0; i < p.getLife(); i++){
+    image(life, 5 + i*life.width*0.5, height - (life.height*0.7), 15, 15);
+  }
 }
 
 void musicStop() {
