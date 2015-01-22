@@ -14,7 +14,6 @@ int columnOfInterest(float x) {
   return -1;
 }
 
-
 void createBackground(){
   int loc;
   float r, g, b;
@@ -188,6 +187,8 @@ void showStats(int score) {
   textSize(12);
   if(arcade) text(sc + score + " >", width - 100, height - 8);
   popMatrix();
+  
+  
 }
 
 void musicStop() {

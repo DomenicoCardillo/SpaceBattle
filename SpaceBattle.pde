@@ -100,8 +100,7 @@ void draw(){
         gameOver(true, 0);
       } 
     }
-    else if(arcade){
-        score++;
+    else if(arcade){ 
         if(!set && numberOfEnemyOnScreen == 1){
           set = true;
           if(SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;

@@ -69,6 +69,7 @@ class Player {
   void setSprite(String path){
     sprite = loadImage(path);    
   }
+  
   int getLife(){ return life; }
   void show(){
     pushMatrix();

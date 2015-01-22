@@ -103,13 +103,16 @@ class Enemy {
   }
   
   void delete(int index){
-    
-    if(eny.get(index).alive) numberOfEnemyOnScreen--;
+    if(eny.get(index).alive){
+      score += 100;
+      numberOfEnemyOnScreen--;
+    }
     eny.get(index).alive = false;
     
     // Respawn if arcade and ENEMY ALL DIE.
     if(arcade && numberOfEnemyOnScreen == 0){
       set = false;
+      score += 500;
       respawn(numberOfEnemy);
     } 
   }
