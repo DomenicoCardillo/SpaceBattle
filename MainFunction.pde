@@ -133,7 +133,7 @@ void gameOver(Boolean result, int score) {
   fill(255);
   textSize(20);
   background(0);
-  if (result) text(x + " won!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2), height*0.3);
+  if (result) text(x + " won!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
   else text(x + " lost!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.5);
   popMatrix();
@@ -185,7 +185,7 @@ void showStats(int score) {
 
   pushMatrix();
   textSize(12);
-  text(sc + score + " >", width - 100, height - 8);
+  if(arcade) text(sc + score + " >", width - 100, height - 8);
   popMatrix();
 }
 
