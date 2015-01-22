@@ -95,13 +95,17 @@ void draw() {
         ENEMY_MOVE_FRAME = 80;
       }
       if (LEVEL == 1) {
-        SHOT_BULLET_FRAME = 150;
-        ENEMY_MOVE_FRAME = 80;
+        ENEMY_MOVE_FRAME = 90;
         fireOff++;
-        if (fireOff <= 500) {
+        if (fireOff <= 900) {
+          SHOT_BULLET_FRAME = 50;
           showWarningFireOff();
           fire = false;
-        } else fire = true;
+        } 
+        else{
+          SHOT_BULLET_FRAME = 150;
+          fire = true;
+        }
       }
       if (LEVEL == 2) {
         SHOT_BULLET_FRAME = 50;
@@ -119,7 +123,7 @@ void draw() {
         set = true;
         if (SHOT_BULLET_FRAME - 50 > 0) SHOT_BULLET_FRAME -= 50;
         else {
-          if (enemyBulletSpeed < 5) enemyBulletSpeed += 0.2;
+          if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.35;
         }
       }
     }
