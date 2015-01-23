@@ -43,13 +43,14 @@ class Player {
     if((up || backspace) && fireOn){
       fireInProcess = true;
       fireOn = false;
-      bul.add( new Bullet(x + playerWidth/2, y - playerHeight/2 - bulletHeight, bulletSpeed, "img/laserGreen.png") );
+      if(LEVEL != 3) bul.add( new Bullet(x + playerWidth/2, y - playerHeight/2 - bulletHeight, bulletSpeed, "img/laserGreen.png") );
+      else bul.add( new Bullet(x + playerWidth/2, y - playerHeight/2 - bulletHeight, bulletSpeed, "img/laserGreenUltimate.png") );
     }
     // The fire is in process, the bullets must be showed on the screen. 
     if(fireInProcess){
       for(int i = 0; i < bul.size(); i++){ 
         // Update and show bullet with a cicle for.
-        if(!bul.get(i).isFinished() && !bul.get(i).collideWithEnemy()){
+        if(!bul.get(i).isFinished() && !bul.get(i).collideWithEnemy() /* && */){
           bul.get(i).update();
           bul.get(i).show();
         }
@@ -69,13 +70,11 @@ class Player {
     // Bullet time of frame counter is incrased.
     timeOfFire++;
   }
-  void playerDamage(){
-    life--;
+  void playerDamage(int dam){
+    life -= dam;
     setSprite("img/playerDamaged.png");
   }
-  void setSprite(String path){
-    sprite = loadImage(path);    
-  }
+  void setSprite(String path){ sprite = loadImage(path); }
   int getLife(){ return life; }
   void setLife(int life){ this.life = life; }
   void show(){

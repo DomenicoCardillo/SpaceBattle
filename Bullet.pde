@@ -48,6 +48,7 @@ class Bullet {
     }
     return false;
   }
+  void setSprite(String path){ sprite = loadImage(path); }
   void show(){
     pushMatrix();
     fill(0, 255, 0);

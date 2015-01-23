@@ -18,22 +18,24 @@ void createBackground() {
   int loc;
   float r, g, b;
   bg.loadPixels();
+  bg0.loadPixels();
   bg1.loadPixels();
   bg2.loadPixels();
-
   for (int i = 0; i < bg.width; i++) {
     for (int j = 0; j < bg.height; j++) {
       loc = i + (j * bg.width);
       r = red(bg.pixels[loc]);
       b = blue(bg.pixels[loc]);
       g = green(bg.pixels[loc]);
+      bg0.pixels[loc] = color(r, 0, b);
       bg1.pixels[loc] = color(0, b, 0);
       bg2.pixels[loc] = color(r, b, 0);
     }
   }
-  bg.updatePixels(); 
   bg2.updatePixels(); 
   bg1.updatePixels();
+  bg0.updatePixels();
+  bg.updatePixels(); 
 }
 
 
@@ -47,7 +49,17 @@ void initGame() {
   eny = new ArrayList < Enemy > ();
 
   for (int i = 0; i < numberOfEnemy; i++) {
-    eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
+    if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
+    else eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemyBoss.png"));
+  }
+  // Change bullet dimension for LEVEL 3
+  if(LEVEL == 3){
+     bulletWidth = 20;
+     bulletHeight = 20;
+  }
+  else{
+     bulletWidth = 5;
+     bulletHeight = 10;
   }
 }
 
@@ -85,9 +97,13 @@ void resetGame() {
 }
 
 void startMenu() {
-  if (LEVEL > 0 && LEVEL < 3) {
+  if (LEVEL > 0 && LEVEL < 4) {
     String x1 = "Level " + (LEVEL) + " success!!";
     String x2 = "Press key 1 for Level " + (LEVEL + 1);
+    if(LEVEL == 3){
+      String x3 = "Final boss' level";
+      text(x1, width*0.5 - (textWidth(x1)/2), height*0.75);
+    }
     pushMatrix();
     fill(255);
     textSize(20);
@@ -105,10 +121,11 @@ void startMenu() {
     String x1 = "Press key 1 or S for Level Game";
     String x2 = "Press key 2 or A for Arcade Game";
 
-    String x3 = "Press backspace for stop the music";
+    String x3 = "Press M for stop the music";
     String x4 = "Press R to RESET your Arcade Best Score";
     String x5 = "Use direction keys for MOVE the player!";
     String x6 = "Use backspace or up direction key for SHOOT a bullet!";
+    String x7 = "Press E to EXIT";
     
     pushMatrix();
     fill(255);
@@ -117,15 +134,20 @@ void startMenu() {
     text(x1, width*0.5 - (textWidth(x1)/2), height*0.40);
     text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
 
+    
+    
     textSize(13);
     text(x3, width*0.5 - (textWidth(x3)/2), 15);
     
     textSize(10);
     text(x4, width*0.5 - (textWidth(x4)/2), 30);
     
+    textSize(12);
+    text(x5, width*0.5 - (textWidth(x5)/2), height - 30);
+    text(x6, width*0.5 - (textWidth(x6)/2), height - 18);
+    
     textSize(10);
-    text(x5, width*0.5 - (textWidth(x5)/2), height - 18);
-    text(x6, width*0.5 - (textWidth(x6)/2), height - 5);
+    text(x7, width*0.5 - (textWidth(x7)/2), height - 5);
 
     popMatrix();
     if (num1) {
@@ -228,11 +250,20 @@ void showWarningFireOff(float stringFire) {
   String x1 = "WARNING!";
   String x2 = "You have NO bullet!!";
   pushMatrix();
-  fill(255, 0, 0, 90);
+  fill(255, 0, 0);
   textSize(14);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.45);
   text(x2, width*0.5 - (textWidth(x2)/2), height*0.55);
   if(stringFire > 1500) text(stringFire - 2000, width*0.5, height*0.60);
+  popMatrix();
+}
+
+void oneShootToDieWarning(){
+  String x = "One SHOOT TO DIE!!";
+  pushMatrix();
+  fill(255, 0, 0, 95);
+  textSize(14);
+  text(x, width*0.5 - (textWidth(x)/2), height*0.45);
   popMatrix();
 }
 

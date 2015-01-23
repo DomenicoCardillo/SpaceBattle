@@ -33,12 +33,14 @@ class EBullet {
       if(y + bulletHeight >= p.y){
         // Istruction for collide tipe 1
         if(x >= p.x && x <= p.x + playerWidth){
-          p.playerDamage();
+          if(LEVEL != 3) p.playerDamage(1);
+          else p.playerDamage(3);
           return true;
         }
         // Istruction for collide type 2, when the bullet hit with his left border, the (playerX + bulletWidth) right border of the player.
         if(x + bulletWidth > p.x && x + bulletWidth < p.x + bulletWidth){
-          p.playerDamage();
+          if(LEVEL != 3) p.playerDamage(1);
+          else p.playerDamage(3);
           return true;
         } 
       }
@@ -46,6 +48,7 @@ class EBullet {
     // No collision.
     return false;
   }
+  void setSprite(String path){ sprite = loadImage(path); }
   void show(){
     pushMatrix();
     fill(0, 255, 255);

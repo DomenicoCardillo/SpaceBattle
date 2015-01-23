@@ -17,6 +17,7 @@ void setup() {
 
   // Adding bg image.
   bg = loadImage("img/bg.jpg");
+  bg0 = loadImage("img/bg.jpg");
   bg1 = loadImage("img/bg.jpg");
   bg2 = loadImage("img/bg.jpg");
   life = loadImage("img/life.png");
@@ -54,19 +55,21 @@ void draw() {
     // Add Background
     if(!bgIsSet){
       bgIsSet = true;
-      backgroundID = int(random(0, 3));
+      backgroundID = int(random(0, 4));
     }
     if (arcade && LEVEL == 0) {
       switch(backgroundID) {
         case 0: background(bg);  break;
         case 1: background(bg1); break;
         case 2: background(bg2); break;
+        case 3: background(bg0); break;
       }
     } 
     else background(bg);
  
-    if (LEVEL == 1) background(bg1);
-    if (LEVEL == 2) background(bg2);
+    if (LEVEL == 1) background(bg0);
+    if (LEVEL == 2) background(bg1);
+    if (LEVEL == 3) background(bg2);
 
     // Load Best Score.
     if (bestScore == 0) bestScore = loadBest();
@@ -85,13 +88,13 @@ void draw() {
     showStats(score);
 
     // Game Over for player
-    if (p.getLife() == 0) gameOver(false, score);
+    if (p.getLife() <= 0) gameOver(false, score);
 
     // Mod SINGLEPLAYER
     if (singleplayer) {     
       // Game Over for enemy, and level up!
       if (numberOfEnemyOnScreen == 0) {
-        if (LEVEL < 3) LEVEL++;
+        if (LEVEL < 4) LEVEL++;
         resetGame();
       }
       // Set global variable per level.
@@ -102,7 +105,7 @@ void draw() {
       if (LEVEL == 1) {
         ENEMY_MOVE_FRAME = 90;
         fireOff++;
-        if (fireOff <= 2000) {
+        if (fireOff <= 2000) { 
           SHOT_BULLET_FRAME = 50;
           showWarningFireOff(fireOff);
           fire = false;
@@ -113,12 +116,18 @@ void draw() {
         }
       }
       if (LEVEL == 2) {
-        SHOT_BULLET_FRAME = 50;
+        SHOT_BULLET_FRAME = 60;
         ENEMY_MOVE_FRAME = 80;
         fire = true;
       }
+      if(LEVEL == 3) {
+        // boss level
+        SHOT_BULLET_FRAME = 80;
+        ENEMY_MOVE_FRAME = 70;
+        oneShootToDieWarning();
+      }
       // You Win.
-      if (LEVEL == 3) {
+      if (LEVEL == 4) {
         gameOver(true, 0);
       }
     }
@@ -128,15 +137,18 @@ void draw() {
         set = true;
         if (SHOT_BULLET_FRAME - 50 > 0){
           SHOT_BULLET_FRAME -= 50;
-          if(p.getLife() < 3) p.setLife(p.getLife() + 1);
         }
         else {
           if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.35;
+          if(p.getLife() < 3){
+            p.setLife(p.getLife() + 1);
+          }       
         }
       }
     }
   } //else !gamestart
-  if (backspace) musicStop();
+  if (stopBg) musicStop();
   if (resScore) resetBestScore();
+  if (exit) exit();
 }
 
