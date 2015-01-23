@@ -14,7 +14,11 @@ void keyPressed(){
     case UP: up = fire; break;
     case ' ': backspace = fire; break;
     case '1': num1 = true; break;
+    case 's': num1 = true; break;
+    case 'S': num1 = true; break; 
     case '2': num2 = true; break;
+    case 'a': num2 = true; break;
+    case 'A': num2 = true; break; 
     case '3': num3 = true; break;
     case 'r': resScore = true; break;
     case 'R': resScore = true; break;
@@ -27,7 +31,11 @@ void keyReleased(){
     case UP: up = false; break;
     case ' ': backspace = false; break;
     case '1': num1 = false; break;
+    case 's': num1 = false; break;
+    case 'S': num1 = false; break; 
     case '2': num2 = false; break;
+    case 'a': num2 = false; break;
+    case 'A': num2 = false; break; 
     case '3': num3 = false; break;
     case 'r': resScore = false; break;
     case 'R': resScore = false; break;

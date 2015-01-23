@@ -87,7 +87,7 @@ void resetGame() {
 void startMenu() {
   if (LEVEL > 0 && LEVEL < 3) {
     String x1 = "Level " + (LEVEL) + " success!!";
-    String x2 = "< Press key '1' for Level: " + (LEVEL + 1) + " >";
+    String x2 = "Press key 1 for Level " + (LEVEL + 1);
     pushMatrix();
     fill(255);
     textSize(20);
@@ -102,11 +102,11 @@ void startMenu() {
     }
   } 
   else {
-    String x1 = "< Press key '1' for Level Game >";
-    String x2 = "< Press key '2' for Arcade Game >";
+    String x1 = "Press key 1 or S for Level Game";
+    String x2 = "Press key 2 or A for Arcade Game";
 
-    String x3 = "Press 'backspace' for stop the music.";
-    String x4 = "Press R to RESET your Arcade Best Score.";
+    String x3 = "Press backspace for stop the music";
+    String x4 = "Press R to RESET your Arcade Best Score";
     String x5 = "Use direction keys for MOVE the player!";
     String x6 = "Use backspace or up direction key for SHOOT a bullet!";
     
@@ -145,26 +145,29 @@ void startMenu() {
 }
 
 void gameOver(Boolean result, int score) {
-  String x = "          You have";
-  String x1 = "< Press key '3' to retry >"; 
+  String x = "You have won!!";
+  String x2 = "You have lost!!";
+  String x1 = "Press key 3 to retry"; 
+  
   pushMatrix();
   fill(255);
   textSize(20);
   background(0);
-  if (result) text(x + " won!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
-  else text(x + " lost!!", width*0.5 - (textWidth(x)/2) - (textWidth(x)/2.5), height*0.3);
-  text(x1, width*0.5 - (textWidth(x1)/2), height*0.5);
+  if (result) text(x, width*0.5 - (textWidth(x)/2), height*0.3);
+  else text(x2, width*0.5 - (textWidth(x2)/2), height*0.3);
+  
+  text(x1, width*0.5 - (textWidth(x1)/2), height*0.9);
   popMatrix();
 
   if (arcade) {
     if (score > bestScore) {
-      String best1 = "< Your NEW best: " + score + "! >"; 
-      text(best1, width*0.5 - (textWidth(best1)/2), height*0.7);
+      String best1 = "Your NEW BEST is " + score + "!"; 
+      text(best1, width*0.5 - (textWidth(best1)/2), height*0.5);
 
       // Add to file
 
       PrintWriter output;
-      output = createWriter("score.txt");
+      output = createWriter("file/score.txt");
       output.println(score);
       output.flush(); // Writes the remaining data to the file
       output.close(); // Finishes the file
@@ -172,8 +175,8 @@ void gameOver(Boolean result, int score) {
       bestScore = loadBest();
     } 
     else {
-      String best2 = "< You Best: " + bestScore  + " >"; 
-      text(best2, width*0.5 - (textWidth(best2)/2), height*0.7);
+      String best2 = "Your BEST is " + bestScore; 
+      text(best2, width*0.5 - (textWidth(best2)/2), height*0.5);
     }
   }
   // The game is finished.
@@ -183,11 +186,11 @@ void gameOver(Boolean result, int score) {
 }
 
 void showStats(int score) {
-  String sc = "< Score: ";
+  String sc = "Score ";
   pushMatrix();
   fill(255, 255, 0, 70);
   textSize(12);
-  if (arcade) text(sc + score + " >", width - 100, height - 8);
+  if (arcade) text(sc + score, width - 100, height - 8);
   popMatrix();
 
   // Show life
@@ -205,7 +208,7 @@ int loadBest() {
   BufferedReader reader;
   String line;
 
-  reader = createReader("score.txt");
+  reader = createReader("file/score.txt");
   try {
     line = reader.readLine();
   }
@@ -222,21 +225,21 @@ int loadBest() {
 }
 
 void showWarningFireOff(float stringFire) {
-  String x1 = " <Warning> ";
-  String x2 = "You have NO bullet!! ";
+  String x1 = "WARNING!";
+  String x2 = "You have NO bullet!!";
   pushMatrix();
   fill(255, 0, 0, 90);
   textSize(14);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.45);
   text(x2, width*0.5 - (textWidth(x2)/2), height*0.55);
-  if(stringFire > 1500) text(stringFire - 2000 + "%", width*0.5, height*0.60);
+  if(stringFire > 1500) text(stringFire - 2000, width*0.5, height*0.60);
   popMatrix();
 }
 
 void resetBestScore(){
     // Add to file 0 reset
     PrintWriter output;
-    output = createWriter("score.txt");
+    output = createWriter("file/score.txt");
     output.println(0);
     output.flush(); // Writes the remaining data to the file
     output.close(); // Finishes the file

@@ -28,9 +28,9 @@ void setup() {
   minim = new Minim(this);
   player = minim.loadFile("audio/bg.mp3", 2048);
 
-  // Adding Font
-  // font = loadFont("HarlowSolid-48.vlw"); 
-  // textFont(font); 
+  //Adding Font
+  font = loadFont("font/ArcadeClassic-48.vlw"); 
+  textFont(font); 
   
   // Play Music
   player.play();
