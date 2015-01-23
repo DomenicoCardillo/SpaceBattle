@@ -101,7 +101,7 @@ void startMenu() {
     String x1 = "Level " + (LEVEL) + " success!!";
     String x2 = "Press key 1 for Level " + (LEVEL + 1);
     if(LEVEL == 3){
-      String x3 = "Final boss' level";
+      String x3 = "Final boss level";
       text(x1, width*0.5 - (textWidth(x1)/2), height*0.75);
     }
     pushMatrix();
