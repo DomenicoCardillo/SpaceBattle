@@ -50,11 +50,19 @@ class Player {
     if(fireInProcess){
       for(int i = 0; i < bul.size(); i++){ 
         // Update and show bullet with a cicle for.
-        if(!bul.get(i).isFinished() && !bul.get(i).collideWithEnemy() /* && */){
+        // When collideWithEnemy return -1, there are no collide with enemys.
+        int collide = bul.get(i).collideWithEnemy();
+        if(!bul.get(i).isFinished() && collide == -1){
           bul.get(i).update();
           bul.get(i).show();
         }
         // If the cicle of i bullet is finished remove it!
+        else if(collide != -1){
+          if(!eny.get(collide).alive){
+            bul.get(i).update();
+            bul.get(i).show();
+          }
+        }
         else bul.remove(i);
       }
       // The array of bullet is empty, fire isn't in process yet.

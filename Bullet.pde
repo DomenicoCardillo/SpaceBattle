@@ -26,7 +26,7 @@ class Bullet {
     // The bullet is on his way
     else return true;
   }
-  Boolean collideWithEnemy(){
+  int collideWithEnemy(){
     // Only when the bullet pass height/2.
     if(y < height/2){
       // Calcolate the column of interest for the coordinate bullet x.
@@ -40,13 +40,13 @@ class Bullet {
             // Controll for range of x of element in floor w
             if(x >= eny.get(floor(w)).x && x <= eny.get(w).x + enemyWidth){
               eny.get(w).delete(w);
-              return true;
+              return w;
             }
           }
         }
       }
     }
-    return false;
+    return -1;
   }
   void setSprite(String path){ sprite = loadImage(path); }
   void show(){
