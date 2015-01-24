@@ -1,7 +1,7 @@
 import ddf.minim.*;
 
 /**
- * Project Name: Space Battle!
+ * Project Name: Space Battle
  * File Name: SpaceBattle
  *
  *
@@ -147,8 +147,12 @@ void draw() {
       }
     }
   } //else !gamestart
-  if (stopBg) musicStop();
+  if (stopSong && musicOn) musicStop();
+  if (resumeSong && !musicOn) musicStart();
   if (resScore) resetBestScore();
   if (exit) exit();
+  
+  // Controll bg.mp3 and restart it
+  checkSound(); 
 }
 

@@ -6,7 +6,6 @@
  * @Keys: right, left, up, backspace, num1, num2, resScore, num3, stopBg.
  */
  
- 
 void keyPressed(){
   switch(keyCode) {
     case RIGHT: right = true; break;
@@ -22,8 +21,10 @@ void keyPressed(){
     case '3': num3 = true; break;
     case 'r': resScore = true; break;
     case 'R': resScore = true; break;
-    case 'm': stopBg = true; break;
-    case 'M': stopBg = true; break;
+    case 'm': stopSong = true; break;
+    case 'M': stopSong = true; break;
+    case 'n': resumeSong = true; break;
+    case 'N': resumeSong = true; break;
     case 'e': exit = true; break;
     case 'E': exit = true; break;
   }
@@ -43,8 +44,10 @@ void keyReleased(){
     case '3': num3 = false; break;
     case 'r': resScore = false; break;
     case 'R': resScore = false; break;
-    case 'm': stopBg = false; break;
-    case 'M': stopBg = false; break;
+    case 'm': stopSong = false; break;
+    case 'M': stopSong = false; break;
+    case 'n': resumeSong = false; break;
+    case 'N': resumeSong = false; break;
     case 'e': exit = false; break;
     case 'E': exit = false; break;  
   }

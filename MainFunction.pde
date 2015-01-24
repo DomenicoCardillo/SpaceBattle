@@ -2,42 +2,11 @@
 /**
  * File: MainFunction
  *
- * Contain all the function,
+ * Contain all the function and Controller,
  * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), loadBest(), musicStop(), showStats(int), showWarning().
  */
 
-
-int columnOfInterest(float x) {
-  for (int i = 0; i < numberOfEnemy; i++) {
-    if (x >= pointOfInterest*i && x <= pointOfInterest * (i+1)) return (i+1);
-  }
-  return -1;
-}
-
-void createBackground() {
-  int loc;
-  float r, g, b;
-  bg.loadPixels();
-  bg0.loadPixels();
-  bg1.loadPixels();
-  bg2.loadPixels();
-  for (int i = 0; i < bg.width; i++) {
-    for (int j = 0; j < bg.height; j++) {
-      loc = i + (j * bg.width);
-      r = red(bg.pixels[loc]);
-      b = blue(bg.pixels[loc]);
-      g = green(bg.pixels[loc]);
-      bg0.pixels[loc] = color(r, 0, b);
-      bg1.pixels[loc] = color(0, b, 0);
-      bg2.pixels[loc] = color(r, b, 0);
-    }
-  }
-  bg2.updatePixels(); 
-  bg1.updatePixels();
-  bg0.updatePixels();
-  bg.updatePixels(); 
-}
-
+/* GAME CTRL */
 
 void initGame() {
   /* Initalize the game. */
@@ -62,7 +31,6 @@ void initGame() {
      bulletHeight = 10;
   }
 }
-
 void resetGame() {
   // Reset Player
   p = null;
@@ -96,6 +64,39 @@ void resetGame() {
   bgIsSet = false;
 }
 
+int columnOfInterest(float x) {
+  for (int i = 0; i < numberOfEnemy; i++) {
+    if (x >= pointOfInterest*i && x <= pointOfInterest * (i+1)) return (i+1);
+  }
+  return -1;
+}
+
+void createBackground() {
+  int loc;
+  float r, g, b;
+  bg.loadPixels();
+  bg0.loadPixels();
+  bg1.loadPixels();
+  bg2.loadPixels();
+  for (int i = 0; i < bg.width; i++) {
+    for (int j = 0; j < bg.height; j++) {
+      loc = i + (j * bg.width);
+      r = red(bg.pixels[loc]);
+      b = blue(bg.pixels[loc]);
+      g = green(bg.pixels[loc]);
+      bg0.pixels[loc] = color(r, 0, b);
+      bg1.pixels[loc] = color(0, b, 0);
+      bg2.pixels[loc] = color(r, b, 0);
+    }
+  }
+  bg2.updatePixels(); 
+  bg1.updatePixels();
+  bg0.updatePixels();
+  bg.updatePixels(); 
+}
+
+/* Interface CTRL */
+
 void startMenu() {
   if (LEVEL > 0 && LEVEL < 4) {
     String x1 = "Level " + (LEVEL) + " success!!";
@@ -121,7 +122,7 @@ void startMenu() {
     String x1 = "Press key 1 or S for Level Game";
     String x2 = "Press key 2 or A for Arcade Game";
 
-    String x3 = "Press M for stop the music";
+    String x3 = "Press M to stop and N to start the music";
     String x4 = "Press R to RESET your Arcade Best Score";
     String x5 = "Use direction keys for MOVE the player!";
     String x6 = "Use backspace or up direction key for SHOOT a bullet!";
@@ -210,8 +211,8 @@ void gameOver(Boolean result, int score) {
 void showStats(int score) {
   String sc = "Score ";
   pushMatrix();
-  fill(255, 255, 0, 70);
-  textSize(12);
+  fill(255, 255, 0, 90);
+  textSize(15);
   if (arcade) text(sc + score, width - 100, height - 8);
   popMatrix();
 
@@ -221,11 +222,24 @@ void showStats(int score) {
   }
 }
 
-void musicStop() {
-  player.close();
-  minim.stop();
+/* Music CTRL */
+void musicStart() {
+  musicOn = true;
+  player = minim.loadFile("audio/bg.mp3", 2048);
+  player.play();
+}
+void musicStop(){ 
+  musicOn = false;
+  player.close(); 
+}
+void checkSound(){
+  if(!player.isPlaying()){
+    player.rewind();
+    player.play();
+  }
 }
 
+/* Best Score CTRL */
 int loadBest() {
   BufferedReader reader;
   String line;
@@ -245,7 +259,17 @@ int loadBest() {
   }
   return 0;
 }
+void resetBestScore(){
+    // Add to file 0 reset
+    PrintWriter output;
+    output = createWriter("file/score.txt");
+    output.println(0);
+    output.flush(); // Writes the remaining data to the file
+    output.close(); // Finishes the file
+    bestScore = loadBest();
+}
 
+/* Show Warning Controller */
 void showWarningFireOff(float stringFire) {
   String x1 = "WARNING!";
   String x2 = "You have NO bullet!!";
@@ -257,7 +281,6 @@ void showWarningFireOff(float stringFire) {
   if(stringFire > 1500) text(stringFire - 2000, width*0.5, height*0.60);
   popMatrix();
 }
-
 void oneShootToDieWarning(){
   String x = "One SHOOT TO DIE!!";
   pushMatrix();
@@ -265,14 +288,4 @@ void oneShootToDieWarning(){
   textSize(14);
   text(x, width*0.5 - (textWidth(x)/2), height*0.45);
   popMatrix();
-}
-
-void resetBestScore(){
-    // Add to file 0 reset
-    PrintWriter output;
-    output = createWriter("file/score.txt");
-    output.println(0);
-    output.flush(); // Writes the remaining data to the file
-    output.close(); // Finishes the file
-    bestScore = loadBest();
 }

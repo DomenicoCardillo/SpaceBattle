@@ -7,6 +7,7 @@
  
 Minim minim; // Audio Context
 AudioPlayer player;
+Boolean musicOn = true;
 
 // Font
 PFont font;
@@ -74,5 +75,5 @@ Boolean enemyFireOn = true;
 
 /* Key */
 Boolean right = false, left = false, up = false, backspace = false;
-Boolean num1 = false, num2 = false, num3 = false, resScore = false, stopBg = false, exit = false;
+Boolean num1 = false, num2 = false, num3 = false, resScore = false, stopSong = false, resumeSong = false, exit = false;
 
