@@ -27,8 +27,8 @@ class EBullet {
     else return true;
   }
   Boolean collideWithPlayer(){
-    // Only when the bullet pass height/2.
-    if(y > height/2){
+    // Only when the bullet pass height*0.8
+    if(y > height*0.8){
       // Istruction for y collide
       if(y + bulletHeight >= p.y){
         // Istruction for collide tipe 1

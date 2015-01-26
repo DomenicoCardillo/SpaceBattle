@@ -1,59 +1,78 @@
 
 /**
  * File: MainFunction
- *
+ * --> GAME CONTROLLERS 
  * Contain all the function and Controller,
  * @function: columnOfInterest(float), initGame(), resetGame(), startMenu(), gameOver(Boolean), loadBest(), musicStop(), showStats(int), showWarning().
  */
 
-/* GAME CTRL */
 
+/* 
+ * funt: Initalize the game. 
+ */
+ 
 void initGame() {
-  /* Initalize the game. */
-
   // Create Player, center of the screen with height = height - paddingDown - playerHeight;
-  p = new Player(width*0.5 - playerWidth/2, height - paddingDown - playerHeight, "img/player.png");
+  p = new Player(width*0.5 - playerWidth*0.5, height - paddingDown - playerHeight, "img/player.png");
 
   // Create the array object with numberofenemy, enemy.
   eny = new ArrayList < Enemy > ();
-
+  
+  // Set line correctly if wrong  
+  if(line <= 1){
+    line = 2;
+    numberOfEnemyOnScreen = numberOfEnemy*line;
+  }
+  if(line > 4){
+    line = 4;
+    numberOfEnemyOnScreen = numberOfEnemy*line;
+  } 
+  // Last level the line is 1.
+  if(LEVEL == 3){
+    line = 1;
+    numberOfEnemyOnScreen = numberOfEnemy*line;
+  }
+  float distanceY = 0;
   for (int i = 0; i < numberOfEnemy*line; i++) {
-    if(i < numberOfEnemy){
-      if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
-      else eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemyBoss.png"));
-    }
-    else{
-      if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*(i%numberOfEnemy), height*0.5, "img/enemy.png"));
-      else eny.add(new Enemy(pointOfInterest*(i%numberOfEnemy), height*0.5, "img/enemyBoss.png"));
-    }
+      distanceY = height*0.05;
+      if(line > 1) if(i >= numberOfEnemy) distanceY = height*0.15;
+      if(line > 2) if(i >= numberOfEnemy*(line-2)) distanceY = height*0.25;
+      if(line > 3) if(i >= numberOfEnemy*(line-1)) distanceY = height*0.35;
+      
+      if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*(i%numberOfEnemy), distanceY, "img/enemy.png"));
+      // Boss Level 3
+      else eny.add(new Enemy(pointOfInterest*(i), distanceY, "img/enemyBoss.png"));
   }
   // Change bullet dimension for LEVEL 3
   if(LEVEL == 3){
      bulletWidth = 20;
      bulletHeight = 20;
+     enemyWidth = 40;
+     enemyHeight = 30;
   }
   else{
      bulletWidth = 5;
      bulletHeight = 10;
+     enemyWidth = 30; 
+     enemyHeight = 20;
   }
 }
 void resetGame() {
   // Reset Player
   p = null;
   // Reset Enemy
-  for (int i = 0; i < numberOfEnemy; i++) {
+  for (int i = 0; i < numberOfEnemy*line; i++) {
     eny.set(i, null);
   }
   // Reset Number Of Enemy.
-  numberOfEnemyOnScreen = numberOfEnemy;
+  numberOfEnemyOnScreen = numberOfEnemy*line;
 
   // Reset other active variables.
   gameStart = false;
   if (LEVEL > 0) singleplayer = true;
   else singleplayer = false;
   arcade = false;
-  direction = "left";
-  timeElapsed = 0;
+  direction = "right";
   fireInProcess = false;
   bulletCount = -1;
   timeOfFire = 0;
@@ -61,7 +80,7 @@ void resetGame() {
   enemyTimeOfFire = 0;
   enemyFireInProcess = false;
   enemyFireOn = true;
-  right = left = up = backspace = num1 = num2 = false;
+  right = left = backspace = num1 = num2 = false;
   fire = true; // possibility for player to fire a bullet.
   fireOff = 0;
   SHOT_BULLET_FRAME = 300;
@@ -70,11 +89,31 @@ void resetGame() {
   bgIsSet = false;
 }
 
-int columnOfInterest(float x) {
-  for (int i = 0; i < numberOfEnemy; i++) {
-    if (x >= pointOfInterest*i && x <= pointOfInterest * (i+1)) return (i+1);
+int [] columnOfInterest(float x) {
+  int [] enemyOfInterest = new int [line];
+  if(line != 1){
+    int j = 0;
+    for(int i = 0; i < numberOfEnemy*line; i++){
+      if (x >= pointOfInterest*((i)%numberOfEnemy) && x <= pointOfInterest * ((i+1)%numberOfEnemy) ){
+        enemyOfInterest[j] = i;
+        j++;
+      }
+    }
+    // Particular Case last column all 0 with line > 1.
+    if(enemyOfInterest[1] == 0){
+      for(int i = 1; i <= line; i++){
+        enemyOfInterest[i-1] = (numberOfEnemy*i) - 1;
+      }
+    }
   }
-  return -1;
+  else{
+    for (int i = 0; i < numberOfEnemy*line; i++) {
+      if (x >= pointOfInterest*i && x <= pointOfInterest * (i+1)){
+        enemyOfInterest[0] = i; 
+      }
+    }
+  }    
+  return enemyOfInterest;
 }
 
 void createBackground() {
@@ -115,8 +154,8 @@ void startMenu() {
     fill(255);
     textSize(20);
     background(0);
-    text(x1, width*0.5 - (textWidth(x1)/2), height*0.40);
-    text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
+    text(x1, width*0.5 - (textWidth(x1)*0.5), height*0.4);
+    text(x2, width*0.5 - (textWidth(x2)*0.5), height*0.6);
     popMatrix();
 
     if (num1) {
@@ -135,26 +174,26 @@ void startMenu() {
     String x7 = "Press E to EXIT";
     
     pushMatrix();
+    
     fill(255);
     textSize(20);
     background(0);
-    text(x1, width*0.5 - (textWidth(x1)/2), height*0.40);
-    text(x2, width*0.5 - (textWidth(x2)/2), height*0.60);
-
+    text(x1, width*0.5 - (textWidth(x1)*0.5), height*0.40);
+    text(x2, width*0.5 - (textWidth(x2)*0.5), height*0.60);
     
     
     textSize(13);
-    text(x3, width*0.5 - (textWidth(x3)/2), 15);
+    text(x3, width*0.5 - (textWidth(x3)*0.5), 15);
     
     textSize(10);
-    text(x4, width*0.5 - (textWidth(x4)/2), 30);
+    text(x4, width*0.5 - (textWidth(x4)*0.5), 30);
     
     textSize(12);
-    text(x5, width*0.5 - (textWidth(x5)/2), height - 30);
-    text(x6, width*0.5 - (textWidth(x6)/2), height - 18);
+    text(x5, width*0.5 - (textWidth(x5)*0.5), height - 30);
+    text(x6, width*0.5 - (textWidth(x6)*0.5), height - 18);
     
     textSize(10);
-    text(x7, width*0.5 - (textWidth(x7)/2), height - 5);
+    text(x7, width*0.5 - (textWidth(x7)*0.5), height - 5);
 
     popMatrix();
     if (num1) {
@@ -182,16 +221,16 @@ void gameOver(Boolean result, int score) {
   fill(255);
   textSize(20);
   background(0);
-  if (result) text(x, width*0.5 - (textWidth(x)/2), height*0.3);
-  else text(x2, width*0.5 - (textWidth(x2)/2), height*0.3);
+  if (result) text(x, width*0.5 - (textWidth(x)*0.5), height*0.3);
+  else text(x2, width*0.5 - (textWidth(x2)*0.5), height*0.3);
   
-  text(x1, width*0.5 - (textWidth(x1)/2), height*0.9);
+  text(x1, width*0.5 - (textWidth(x1)*0.5), height*0.9);
   popMatrix();
 
   if (arcade) {
     if (score > bestScore) {
       String best1 = "Your NEW BEST is " + score + "!"; 
-      text(best1, width*0.5 - (textWidth(best1)/2), height*0.5);
+      text(best1, width*0.5 - (textWidth(best1)*0.5), height*0.5);
 
       // Add to file
 
@@ -205,7 +244,7 @@ void gameOver(Boolean result, int score) {
     } 
     else {
       String best2 = "Your BEST is " + bestScore; 
-      text(best2, width*0.5 - (textWidth(best2)/2), height*0.5);
+      text(best2, width*0.5 - (textWidth(best2)*0.5), height*0.5);
     }
   }
   // The game is finished.
@@ -282,8 +321,8 @@ void showWarningFireOff(float stringFire) {
   pushMatrix();
   fill(255, 0, 0, 85);
   textSize(14);
-  text(x1, width*0.5 - (textWidth(x1)/2), height*0.45);
-  text(x2, width*0.5 - (textWidth(x2)/2), height*0.55);
+  text(x1, width*0.5 - (textWidth(x1)*0.5), height*0.45);
+  text(x2, width*0.5 - (textWidth(x2)*0.5), height*0.55);
   if(stringFire > 1500) text(int(2000 - stringFire), width*0.5, height*0.60);
   popMatrix();
 }
@@ -292,7 +331,7 @@ void oneShootToDieWarning(){
   pushMatrix();
   fill(255, 0, 0, 85);
   textSize(14);
-  text(x, width*0.5 - (textWidth(x)/2), height*0.45);
+  text(x, width*0.5 - (textWidth(x)*0.5), height*0.45);
   popMatrix();
 }
 void shootSetup(){

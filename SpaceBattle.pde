@@ -52,8 +52,6 @@ void draw() {
   else if (!gameStart) startMenu();
   else {
     
-    shootSetup();
-    
     // Add Background
     if(!bgIsSet){
       bgIsSet = true;
@@ -72,14 +70,18 @@ void draw() {
     if (LEVEL == 1) background(bg0);
     if (LEVEL == 2) background(bg1);
     if (LEVEL == 3) background(bg2);
-
+   
+    // For resolute bug of consecutive shoot    
+    shootSetup();
+    
     // Load Best Score.
     if (bestScore == 0) bestScore = loadBest();
 
+
     // Enemy UPDATE and SHOW.
     for (int i = 0; i < numberOfEnemy*line; i++) {
-      eny.get(i).update(i);
-      if (eny.get(i).alive) eny.get(i).show();
+      eny.get(i).update();
+      if(eny.get(i).alive) eny.get(i).show();    
     }
 
     // Player UPDATE and SHOW.
@@ -101,31 +103,26 @@ void draw() {
       }
       // Set global variable per level.
       if (LEVEL == 0) {      
-        SHOT_BULLET_FRAME = 300;
-        ENEMY_MOVE_FRAME = 80;
+        SHOT_BULLET_FRAME = 500;
       }
       if (LEVEL == 1) {
-        ENEMY_MOVE_FRAME = 90;
         fireOff++;
-        if (fireOff <= 2000) { 
-          SHOT_BULLET_FRAME = 50;
+        if (fireOff <= 100) { // TEST 
+          SHOT_BULLET_FRAME = 400;
           showWarningFireOff(fireOff);
           fire = false;
         } 
         else{
-          SHOT_BULLET_FRAME = 150;
+          SHOT_BULLET_FRAME = 500;
           fire = true;
         }
       }
       if (LEVEL == 2) {
-        SHOT_BULLET_FRAME = 60;
-        ENEMY_MOVE_FRAME = 80;
-        fire = true;
+        SHOT_BULLET_FRAME = 350;
       }
+      // Boss Level   
       if(LEVEL == 3) {
-        // boss level
-        SHOT_BULLET_FRAME = 80;
-        ENEMY_MOVE_FRAME = 70;
+        SHOT_BULLET_FRAME = 100;
         oneShootToDieWarning();
       }
       // You Win.
@@ -137,11 +134,11 @@ void draw() {
     else if (arcade) { 
       if (!set && numberOfEnemyOnScreen == 1) {
         set = true;
-        if (SHOT_BULLET_FRAME - 50 > 0){
-          SHOT_BULLET_FRAME -= 50;
+        if (SHOT_BULLET_FRAME - 200 > 0){
+          SHOT_BULLET_FRAME -= 30;
         }
         else {
-          if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.35;
+          if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.15;
           if(p.getLife() < 3){
             p.setLife(p.getLife() + 1);
           }       

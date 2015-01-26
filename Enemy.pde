@@ -25,15 +25,9 @@ class Enemy {
     bul = new ArrayList < EBullet > (maxBulletOnScreen);
     alive = true;
   }
-  void update(int index){
+  void update(){
     
-    /*
-    // Moviment left and right.
-    if(x + enemyWidth < (index+1) * pointOfInterest && direction == "left") x += speedX;
-    else direction = "right";
-    if(x > index * pointOfInterest && direction == "right") x -= speedX;
-    else direction = "left";
-    */
+    // Moviment
     if(direction == "right"){ 
       if(x + enemyWidth < width - 5) x += speedX;
       else direction = "left";
@@ -41,31 +35,19 @@ class Enemy {
     if(direction == "left"){ 
       if(x > 5) x -= speedX;
       else direction = "right";
-    }
-    
-    timeElapsed++;
-    // Time elapsed, after (GLOBAL.ENEMY_MOVE_FRAME) frame speed is incrased by acceleration.
-//    if(timeElapsed > ENEMY_MOVE_FRAME){
-//      timeElapsed = 0;
-//      // incrased speed += acceleration
-//      for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = speedX + acc;
-//    } 
-    
-    // Too Fast, fix to a maxSpeedX value.
-    if(speedX > maxSpeedX) for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = maxSpeedX;
+    } 
     
     // Enemies shoot!
-    if(enemyFireOn){ // Init to shoot when the speed of the enemies reaches the maxSpeed. 
+    if(enemyFireOn){
       enemyFireInProcess = true;
       enemyFireOn = false;
+      
       // Search an enemy on screen that can shoot a bullet.
       Boolean find = false;
       int enemyShoot = 0;
-//      while(!find){
-//        enemyShoot = int(random(0, numberOfEnemy));
-//        if(eny.get(enemyShoot).alive) find = true;
-//      }
-      enemyShoot = int(random(0, numberOfEnemy));
+      enemyShoot = int(random(0, numberOfEnemy*line));
+      
+      // Only NumberOfEnemy Boss
       if(eny.get(enemyShoot).alive) find = true;
       if(find){
         if(LEVEL != 3) bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRed.png") );
@@ -108,7 +90,7 @@ class Enemy {
   void respawn(int num){
       int numOfRespawns = 0;  
       // Respawn n - enemy
-      for(int i = 0; i < numberOfEnemy; i++){
+      for(int i = 0; i < numberOfEnemy*line; i++){
         if(numOfRespawns == num) break;
          eny.get(i).alive = true;
          numberOfEnemyOnScreen++;
@@ -119,7 +101,7 @@ class Enemy {
   
   void delete(int index){
     if(eny.get(index).alive){
-      score += 100;
+      score += 30;
       numberOfEnemyOnScreen--;
     }
     eny.get(index).alive = false;
@@ -127,8 +109,8 @@ class Enemy {
     // Respawn if arcade and ENEMY ALL DIE.
     if(arcade && numberOfEnemyOnScreen == 0){
       set = false;
-      score += 500;
-      respawn(numberOfEnemy);
+      score += 90;
+      respawn(numberOfEnemy*line);
     } 
   }
   void setSprite(String path){ sprite = loadImage(path); }
