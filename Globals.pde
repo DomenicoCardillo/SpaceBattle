@@ -47,7 +47,7 @@ int paddingDown = 8;
 /* Enemy  */ 
 int enemyWidth = 35; // 30
 int enemyHeight = 25; // 20
-String direction = "left";
+String direction = "right";
 int timeElapsed = 0;
 
 /* Player */
@@ -76,4 +76,5 @@ Boolean enemyFireOn = true;
 /* Key */
 Boolean right = false, left = false, up = false, backspace = false;
 Boolean num1 = false, num2 = false, num3 = false, resScore = false, stopSong = false, resumeSong = false, exit = false;
+Boolean saveBack = false, lastSaveBack = false;
 

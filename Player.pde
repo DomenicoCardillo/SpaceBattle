@@ -40,7 +40,7 @@ class Player {
       x -= speed;
     }
     // Fire keys was pressed.
-    if((saveUp || backspace) && !lastSaveUp && fireOn){
+    if(saveBack && !lastSaveBack && fireOn){
       fireInProcess = true;
       fireOn = false;
       if(LEVEL != 3) bul.add( new Bullet(x + playerWidth/2, y - playerHeight/2 - bulletHeight, bulletSpeed, "img/laserGreen.png") );
@@ -77,8 +77,6 @@ class Player {
     }
     // Bullet time of frame counter is incrased.
     timeOfFire++;
-    lastSaveUp = saveUp;
-    saveUp = up;
   }
   void playerDamage(int dam){
     life -= dam;
@@ -94,6 +92,4 @@ class Player {
     image(sprite, x, y, playerWidth, playerHeight);
     popMatrix();  
   }
-  
-  
 }

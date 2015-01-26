@@ -52,6 +52,8 @@ void draw() {
   else if (!gameStart) startMenu();
   else {
     
+    shootSetup();
+    
     // Add Background
     if(!bgIsSet){
       bgIsSet = true;

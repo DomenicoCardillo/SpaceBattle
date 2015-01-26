@@ -27,19 +27,29 @@ class Enemy {
   }
   void update(int index){
     
+    /*
     // Moviment left and right.
     if(x + enemyWidth < (index+1) * pointOfInterest && direction == "left") x += speedX;
     else direction = "right";
     if(x > index * pointOfInterest && direction == "right") x -= speedX;
     else direction = "left";
+    */
+    if(direction == "right"){ 
+      if(x + enemyWidth < width - 5) x += speedX;
+      else direction = "left";
+    }
+    if(direction == "left"){ 
+      if(x > 5) x -= speedX;
+      else direction = "right";
+    }
     
     timeElapsed++;
     // Time elapsed, after (GLOBAL.ENEMY_MOVE_FRAME) frame speed is incrased by acceleration.
-    if(timeElapsed > ENEMY_MOVE_FRAME){
-      timeElapsed = 0;
-      // incrased speed += acceleration
-      for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = speedX + acc;
-    } 
+//    if(timeElapsed > ENEMY_MOVE_FRAME){
+//      timeElapsed = 0;
+//      // incrased speed += acceleration
+//      for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = speedX + acc;
+//    } 
     
     // Too Fast, fix to a maxSpeedX value.
     if(speedX > maxSpeedX) for(int i = 0; i < numberOfEnemy; i++) if(eny.get(i) != null) eny.get(i).speedX = maxSpeedX;
