@@ -51,12 +51,16 @@ class Enemy {
       // Search an enemy on screen that can shoot a bullet.
       Boolean find = false;
       int enemyShoot = 0;
-      while(!find){
-        enemyShoot = int(random(0, numberOfEnemy));
-        if(eny.get(enemyShoot).alive) find = true;
+//      while(!find){
+//        enemyShoot = int(random(0, numberOfEnemy));
+//        if(eny.get(enemyShoot).alive) find = true;
+//      }
+      enemyShoot = int(random(0, numberOfEnemy));
+      if(eny.get(enemyShoot).alive) find = true;
+      if(find){
+        if(LEVEL != 3) bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRed.png") );
+        else bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRedUltimate.png") );
       }
-      if(LEVEL != 3) bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRed.png") );
-      else bul.add( new EBullet(eny.get(enemyShoot).x + enemyWidth/2, eny.get(enemyShoot).y + (enemyHeight/2) + bulletHeight, enemyBulletSpeed, "img/laserRedUltimate.png") );
     }
     
     // The fire is in process, the bullets must be showed on the screen. 
