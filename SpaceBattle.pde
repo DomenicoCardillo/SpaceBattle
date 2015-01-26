@@ -77,7 +77,7 @@ void draw() {
     if (bestScore == 0) bestScore = loadBest();
 
     // Enemy UPDATE and SHOW.
-    for (int i = 0; i < numberOfEnemy; i++) {
+    for (int i = 0; i < numberOfEnemy*line; i++) {
       eny.get(i).update(i);
       if (eny.get(i).alive) eny.get(i).show();
     }

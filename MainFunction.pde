@@ -17,9 +17,15 @@ void initGame() {
   // Create the array object with numberofenemy, enemy.
   eny = new ArrayList < Enemy > ();
 
-  for (int i = 0; i < numberOfEnemy; i++) {
-    if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
-    else eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemyBoss.png"));
+  for (int i = 0; i < numberOfEnemy*line; i++) {
+    if(i < numberOfEnemy){
+      if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemy.png"));
+      else eny.add(new Enemy(pointOfInterest*i, height/20, "img/enemyBoss.png"));
+    }
+    else{
+      if(LEVEL != 3) eny.add(new Enemy(pointOfInterest*(i%numberOfEnemy), height*0.5, "img/enemy.png"));
+      else eny.add(new Enemy(pointOfInterest*(i%numberOfEnemy), height*0.5, "img/enemyBoss.png"));
+    }
   }
   // Change bullet dimension for LEVEL 3
   if(LEVEL == 3){

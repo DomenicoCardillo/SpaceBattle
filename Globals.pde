@@ -9,6 +9,8 @@ Minim minim; // Audio Context
 AudioPlayer player;
 Boolean musicOn = true;
 
+int line = 2;
+
 // Font
 PFont font;
 
