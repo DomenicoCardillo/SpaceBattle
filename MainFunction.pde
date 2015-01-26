@@ -274,17 +274,17 @@ void showWarningFireOff(float stringFire) {
   String x1 = "WARNING!";
   String x2 = "You have NO bullet!!";
   pushMatrix();
-  fill(255, 0, 0);
+  fill(255, 0, 0, 85);
   textSize(14);
   text(x1, width*0.5 - (textWidth(x1)/2), height*0.45);
   text(x2, width*0.5 - (textWidth(x2)/2), height*0.55);
-  if(stringFire > 1500) text(stringFire - 2000, width*0.5, height*0.60);
+  if(stringFire > 1500) text(stringFire - 2000, width*0.5, height*0.60); //to do: non trova il simbolo -
   popMatrix();
 }
 void oneShootToDieWarning(){
   String x = "One SHOOT TO DIE!!";
   pushMatrix();
-  fill(255, 0, 0, 95);
+  fill(255, 0, 0, 85);
   textSize(14);
   text(x, width*0.5 - (textWidth(x)/2), height*0.45);
   popMatrix();

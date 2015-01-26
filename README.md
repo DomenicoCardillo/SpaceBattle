@@ -3,7 +3,7 @@ Student: Domenico Cardillo
 Number: W83000090
 
 Programming Language: Processing.
-Library Used: Minim 
+Library Used: Minim
 
 This application was developed using GIT version software.
 

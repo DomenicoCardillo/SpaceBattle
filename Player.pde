@@ -71,7 +71,7 @@ class Player {
       }
     }
     // Shoot a bullet, one each 30 frames.
-    if(timeOfFire == 45){
+    if(timeOfFire == 15){
       timeOfFire = 0;
       fireOn = true;
     }
