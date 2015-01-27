@@ -70,7 +70,7 @@ void draw() {
     if (LEVEL == 1) background(bg0);
     if (LEVEL == 2) background(bg1);
     if (LEVEL == 3) background(bg2);
-   
+
     // For resolute bug of consecutive shoot    
     shootSetup();
     

@@ -18,7 +18,6 @@ Boolean musicOn = true;
 /* Font */
 PFont font;
 
-
 /* Singleplayer and Arcade Global Variables */
 Boolean singleplayer = false;
 Boolean arcade = false;
@@ -40,7 +39,7 @@ Player p;
 
 /* Main */ 
 int numberOfEnemy = 7;
-int line = 1;
+int line = 4;
 int numberOfEnemyOnScreen = numberOfEnemy*line;
 Boolean gameStart = false;
 Boolean gameIsOver = false;
