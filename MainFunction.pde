@@ -65,6 +65,9 @@ void resetGame() {
     eny.set(i, null);
   }
   // Reset Number Of Enemy.
+  if(LEVEL == 4) line = 4;
+  
+  // Reset Number Of Enemy.
   numberOfEnemyOnScreen = numberOfEnemy*line;
 
   // Reset other active variables.
@@ -87,6 +90,32 @@ void resetGame() {
   score = 0;
   enemyBulletSpeed = 3;
   bgIsSet = false;
+}
+
+// @param: mode is ARCADE = false/true
+void loadingGame(Boolean mode){ 
+  String load = "Loading ";
+  String load1 = "Load Backgrounds";
+  String load2 = "Load Brutal Enemies";
+  String load3 = "Load Strong Player";
+  String load4 = "";
+  if(mode) load4 = "Start Arcade Game";
+  else load4 = "Start Singleplayer Game";
+  pushMatrix();
+  fill(255);
+  textSize(20);
+  background(0);
+  int mapLoad = round(map(loading, 0, 400, 0, 100));
+  text(load + mapLoad, width*0.5 - textWidth(load)*0.5 - 10, height*0.3);
+  
+  textSize(15);
+  
+  if(loading >= 100) text(load1, width*0.5 - textWidth(load1)*0.5 - 1.5, height*0.45);
+  if(loading >= 200) text(load2, width*0.5 - textWidth(load2)*0.5 - 1.5, height*0.55);
+  if(loading >= 300) text(load3, width*0.5 - textWidth(load3)*0.5 - 1.5, height*0.65);
+  if(loading >= 350) text(load4, width*0.5 - textWidth(load4)*0.5 - 1.5, height*0.75);
+  popMatrix();
+  loading++;
 }
 
 int [] columnOfInterest(float x) {

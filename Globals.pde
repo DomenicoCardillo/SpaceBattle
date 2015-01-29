@@ -45,6 +45,7 @@ Boolean gameStart = false;
 Boolean gameIsOver = false;
 int pointOfInterest = WIDTH/numberOfEnemy;
 int paddingDown = 8;
+int loading = 0;
 
 /* Enemy  */ 
 int enemyWidth = 30; 

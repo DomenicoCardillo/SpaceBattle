@@ -77,74 +77,78 @@ void draw() {
     // Load Best Score.
     if (bestScore == 0) bestScore = loadBest();
 
-
-    // Enemy UPDATE and SHOW.
-    for (int i = 0; i < numberOfEnemy*line; i++) {
-      eny.get(i).update();
-      if(eny.get(i).alive) eny.get(i).show();    
-    }
-
-    // Player UPDATE and SHOW.
-    p.update();
-    p.show();
-
-    // Show statistic of player
-    showStats(score);
-
-    // Game Over for player
-    if (p.getLife() <= 0) gameOver(false, score);
-
-    // Mod SINGLEPLAYER
-    if (singleplayer) {     
-      // Game Over for enemy, and level up!
-      if (numberOfEnemyOnScreen == 0) {
-        if (LEVEL < 4) LEVEL++;
-        resetGame();
+    if(loading > 400){
+        
+      // Enemy UPDATE and SHOW.
+      for (int i = 0; i < numberOfEnemy*line; i++) {
+        eny.get(i).update();
+        if(eny.get(i).alive) eny.get(i).show();    
       }
-      // Set global variable per level.
-      if (LEVEL == 0) {      
-        SHOT_BULLET_FRAME = 500;
-      }
-      if (LEVEL == 1) {
-        fireOff++;
-        if (fireOff <= 100) { // TEST 
-          SHOT_BULLET_FRAME = 400;
-          showWarningFireOff(fireOff);
-          fire = false;
-        } 
-        else{
+  
+      // Player UPDATE and SHOW.
+      p.update();
+      p.show();
+  
+      // Show statistic of player
+      showStats(score);
+  
+      // Game Over for player
+      if (p.getLife() <= 0) gameOver(false, score);
+  
+      // Mod SINGLEPLAYER
+      if (singleplayer) {     
+        // Game Over for enemy, and level up!
+        if (numberOfEnemyOnScreen == 0) {
+          if (LEVEL < 4) LEVEL++;
+          resetGame();
+        }
+        // Set global variable per level.
+        if (LEVEL == 0) {      
           SHOT_BULLET_FRAME = 500;
-          fire = true;
+        }
+        if (LEVEL == 1) {
+          fireOff++;
+          if (fireOff <= 100) { // TEST 
+            SHOT_BULLET_FRAME = 400;
+            showWarningFireOff(fireOff);
+            fire = false;
+          } 
+          else{
+            SHOT_BULLET_FRAME = 500;
+            fire = true;
+          }
+        }
+        if (LEVEL == 2) {
+          SHOT_BULLET_FRAME = 350;
+        }
+        // Boss Level   
+        if(LEVEL == 3) {
+          SHOT_BULLET_FRAME = 100;
+          oneShootToDieWarning();
+        }
+        // You Win.
+        if (LEVEL == 4) {
+          line = 1; // For boos enemy resolve  bugs.
+          gameOver(true, 0);
         }
       }
-      if (LEVEL == 2) {
-        SHOT_BULLET_FRAME = 350;
-      }
-      // Boss Level   
-      if(LEVEL == 3) {
-        SHOT_BULLET_FRAME = 100;
-        oneShootToDieWarning();
-      }
-      // You Win.
-      if (LEVEL == 4) {
-        gameOver(true, 0);
+      // Mod ARCADE
+      else if (arcade) { 
+        if (!set && numberOfEnemyOnScreen == 1) {
+          set = true;
+          if (SHOT_BULLET_FRAME - 200 > 0){
+            SHOT_BULLET_FRAME -= 30;
+          }
+          else {
+            if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.15;
+            if(p.getLife() < 3){
+              p.setLife(p.getLife() + 1);
+            }       
+          }
+        }
       }
     }
-    // Mod ARCADE
-    else if (arcade) { 
-      if (!set && numberOfEnemyOnScreen == 1) {
-        set = true;
-        if (SHOT_BULLET_FRAME - 200 > 0){
-          SHOT_BULLET_FRAME -= 30;
-        }
-        else {
-          if (enemyBulletSpeed < 10) enemyBulletSpeed += 0.15;
-          if(p.getLife() < 3){
-            p.setLife(p.getLife() + 1);
-          }       
-        }
-      }
-    }
+    else loadingGame(arcade);
   } //else !gamestart
   if (stopSong && musicOn) musicStop();
   if (resumeSong && !musicOn) musicStart();
