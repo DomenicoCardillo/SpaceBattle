@@ -108,7 +108,7 @@ void draw() {
         }
         if (LEVEL == 1) {
           fireOff++;
-          if (fireOff <= 100) { // TEST 
+          if (fireOff <= 1500) { // TEST 
             SHOT_BULLET_FRAME = 400;
             showWarningFireOff(fireOff);
             fire = false;

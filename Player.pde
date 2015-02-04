@@ -19,7 +19,7 @@ class Player {
     this.y = y;
     sprite = loadImage(path);
     speed = 4.3;
-    life = 50;
+    life = 3;
     bul = new ArrayList < Bullet > (maxBulletOnScreen);
   }
   void update(){
@@ -56,13 +56,6 @@ class Player {
           bul.get(i).update();
           bul.get(i).show();
         }
-        // If the cicle of i bullet is finished remove it!
-//        else if(collide != -1){
-//          if(!eny.get(collide).alive){
-//            bul.get(i).update();
-//            bul.get(i).show();
-//          }
-//        }
         else bul.remove(i);
       }
       // The array of bullet is empty, fire isn't in process yet.
