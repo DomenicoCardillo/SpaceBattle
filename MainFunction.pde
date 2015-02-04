@@ -199,7 +199,7 @@ void startMenu() {
     String x3 = "Press M to stop and N to start the music";
     String x4 = "Press R to RESET your Arcade Best Score";
     String x5 = "Use direction keys for MOVE the player!";
-    String x6 = "Use backspace or up direction key for SHOOT a bullet!";
+    String x6 = "Use backspace direction key for SHOOT a bullet!";
     String x7 = "Press E to EXIT";
     
     pushMatrix();
