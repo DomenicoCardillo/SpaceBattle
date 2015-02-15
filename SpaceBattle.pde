@@ -7,7 +7,6 @@ import ddf.minim.*;
  *
  * Created by Processing 2.2.1
  * Studente: Domenico Cardillo
- *
  */
 
 void setup() {
